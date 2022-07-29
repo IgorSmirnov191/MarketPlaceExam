@@ -1,4 +1,7 @@
 using MarketPlace.MVC.Data;
+using MarketPlaceExam.Business.Services;
+using MarketPlaceExam.Data.Repos;
+using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +16,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+RegisterServices(builder);
 
 var app = builder.Build();
 
@@ -42,3 +47,10 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+// Registrer your services using Dependency Injection here!
+void RegisterServices(WebApplicationBuilder builder)
+{
+    builder.Services.AddTransient<ICategoryService, CategoryService>();
+    builder.Services.AddTransient<ICategoryRepo, CategoryRepo>();
+}

@@ -4,6 +4,7 @@ using MarketPlace.MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPlace.MVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220729123944_Annos")]
+    partial class Annos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.CartItem", b =>
@@ -75,7 +77,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Category", b =>
@@ -97,7 +99,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Order", b =>
@@ -123,7 +125,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Payment", b =>
@@ -206,7 +208,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Payments", (string)null);
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Picture", b =>
@@ -224,7 +226,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pictures", (string)null);
+                    b.ToTable("Pictures");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Product", b =>
@@ -284,7 +286,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Shipments", b =>
@@ -310,7 +312,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("ShipperId");
 
-                    b.ToTable("Shipments", (string)null);
+                    b.ToTable("Shipments");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Shipper", b =>
@@ -332,7 +334,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shippers", (string)null);
+                    b.ToTable("Shippers");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Stock", b =>
@@ -353,7 +355,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Stocks", (string)null);
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Supplier", b =>
@@ -407,7 +409,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers", (string)null);
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.User", b =>
@@ -468,7 +470,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
