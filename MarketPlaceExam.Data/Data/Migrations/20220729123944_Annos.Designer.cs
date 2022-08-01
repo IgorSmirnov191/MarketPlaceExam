@@ -289,7 +289,7 @@ namespace MarketPlace.MVC.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("MarketPlace.Entities.Shipments", b =>
+            modelBuilder.Entity("MarketPlace.Entities.Shipment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -312,10 +312,10 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("ShipperId");
 
-                    b.ToTable("Shipments");
+                    b.ToTable("Shipment");
                 });
 
-            modelBuilder.Entity("MarketPlace.Entities.Shipper", b =>
+            modelBuilder.Entity("MarketPlace.Entities.ShipperRepo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -764,7 +764,7 @@ namespace MarketPlace.MVC.Data.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("MarketPlace.Entities.Shipments", b =>
+            modelBuilder.Entity("MarketPlace.Entities.Shipment", b =>
                 {
                     b.HasOne("MarketPlace.Entities.Order", "Order")
                         .WithMany()
@@ -772,7 +772,7 @@ namespace MarketPlace.MVC.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MarketPlace.Entities.Shipper", "Shipper")
+                    b.HasOne("MarketPlace.Entities.ShipperRepo", "ShipperRepo")
                         .WithMany()
                         .HasForeignKey("ShipperId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -780,7 +780,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.Navigation("Order");
 
-                    b.Navigation("Shipper");
+                    b.Navigation("ShipperRepo");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Stock", b =>

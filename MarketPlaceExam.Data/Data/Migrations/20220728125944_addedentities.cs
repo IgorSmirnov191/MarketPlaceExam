@@ -68,7 +68,7 @@ namespace MarketPlace.MVC.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Shipments",
+                name: "Shipment",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -370,7 +370,7 @@ namespace MarketPlace.MVC.Data.Migrations
                 name: "Payments");
 
             migrationBuilder.DropTable(
-                name: "Shipments");
+                name: "Shipment");
 
             migrationBuilder.DropTable(
                 name: "Shippers");

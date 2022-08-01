@@ -22,7 +22,7 @@ namespace MarketPlace.MVC.Data
         public DbSet<Picture> Pictures { get; set; }
 
         public DbSet<Product> Products { get; set; }
-        public DbSet<Shipments> Shipments { get; set; }
+        public DbSet<Shipment> Shipments { get; set; }
 
         public DbSet<Shipper> Shippers { get; set; }
         public DbSet<Stock> Stocks { get; set; }

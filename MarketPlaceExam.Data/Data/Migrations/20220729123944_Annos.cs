@@ -445,12 +445,12 @@ namespace MarketPlace.MVC.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shipments_OrderId",
-                table: "Shipments",
+                table: "Shipment",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shipments_ShipperId",
-                table: "Shipments",
+                table: "Shipment",
                 column: "ShipperId");
 
             migrationBuilder.CreateIndex(
@@ -517,7 +517,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Shipments_Orders_OrderId",
-                table: "Shipments",
+                table: "Shipment",
                 column: "OrderId",
                 principalTable: "Orders",
                 principalColumn: "Id",
@@ -525,7 +525,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Shipments_Shippers_ShipperId",
-                table: "Shipments",
+                table: "Shipment",
                 column: "ShipperId",
                 principalTable: "Shippers",
                 principalColumn: "Id",
@@ -556,19 +556,19 @@ namespace MarketPlace.MVC.Data.Migrations
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Shipments_Orders_OrderId",
-                table: "Shipments");
+                table: "Shipment");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Shipments_Shippers_ShipperId",
-                table: "Shipments");
+                table: "Shipment");
 
             migrationBuilder.DropIndex(
                 name: "IX_Shipments_OrderId",
-                table: "Shipments");
+                table: "Shipment");
 
             migrationBuilder.DropIndex(
                 name: "IX_Shipments_ShipperId",
-                table: "Shipments");
+                table: "Shipment");
 
             migrationBuilder.DropIndex(
                 name: "IX_Payments_UserId",

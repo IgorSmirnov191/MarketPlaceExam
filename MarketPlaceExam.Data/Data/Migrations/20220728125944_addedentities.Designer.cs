@@ -274,7 +274,7 @@ namespace MarketPlace.MVC.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("MarketPlace.Entities.Shipments", b =>
+            modelBuilder.Entity("MarketPlace.Entities.Shipment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -293,10 +293,10 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shipments");
+                    b.ToTable("Shipment");
                 });
 
-            modelBuilder.Entity("MarketPlace.Entities.Shipper", b =>
+            modelBuilder.Entity("MarketPlace.Entities.ShipperRepo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
