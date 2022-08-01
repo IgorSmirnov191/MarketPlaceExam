@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MarketPlace.Entities;
+using MarketPlaceExam.Data.Entities;
 
 namespace MarketPlace.MVC.Data
 {

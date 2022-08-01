@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MarketPlace.Entities;
+using MarketPlaceExam.Data.Entities;
 using MarketPlace.MVC.Data;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -42,14 +42,10 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task UpdateStock(Stock stock)
         {
-            var stocklocal = await _context.Stocks.FindAsync(stock.Id);
-            if (stocklocal != null)
+            if (stock != null)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Stock, Stock>());
-                var mapper = new Mapper(config);
-                stocklocal = mapper.Map<Stock>(stocklocal);
+                _context.Stocks.Update(stock);
                 _context.SaveChanges();
-
             }
         }
 

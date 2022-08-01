@@ -5,20 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarketPlaceExam.Data.Entities
+namespace MarketPlaceExam.Business.Model
 {
-    public class Picture
+    public class PictureModel
     {
-        [Key]
         public int Id { get; set; }
-
-        [Required]
-        [MaxLength(100)]
         public string Uri { get; set; }
-
-        public override string ToString()
-        {
-            return $"Id{Id}, Uri: {Uri}";
-        }
     }
 }

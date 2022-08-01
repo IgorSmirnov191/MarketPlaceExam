@@ -1,4 +1,5 @@
 ﻿using MarketPlaceExam.Business.Model;
+using MarketPlaceExam.Data.Entities;
 
 namespace MarketPlaceExam.Business.Services
 {
@@ -6,5 +7,7 @@ namespace MarketPlaceExam.Business.Services
     {
         Task AddCategory(CategoryModel category);
         Task<CategoryModel> GetCategory(int id);
+        Task UpdateCategory(CategoryModel category);
+        Task DeleteCategory(int id);
     }
 }

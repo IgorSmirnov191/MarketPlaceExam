@@ -23,15 +23,21 @@ namespace MarketPlace.MVC.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> PrivacyAsync()
         {
-            CategoryModel dummyModel = new CategoryModel
-            {
-                Name = "FOO",
-                Description = "BAR",
-            };
-            
-            _service.AddCategory(dummyModel);
+            //CategoryModel dummyModel = new CategoryModel
+            //{
+            //    Name = "One",
+            //    Description = "Two",
+            //};
+
+            // await _service.AddCategory(dummyModel);
+
+            // dummyModel.Id = 1;
+            //  await _service.UpdateCategory(dummyModel);
+            //  await _service.DeleteCategory(1);
+
+
             return View();
         }
 

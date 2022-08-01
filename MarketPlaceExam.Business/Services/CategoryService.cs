@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MarketPlace.Entities;
+using MarketPlaceExam.Data.Entities;
 using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Data.Repos.Interfaces;
 
@@ -19,36 +19,31 @@ namespace MarketPlaceExam.Business.Services
         // TODO: CRUD.
         public async Task AddCategory(CategoryModel category)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Category, Category>());
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<CategoryModel, Category>());
             var mapper = new Mapper(config);
-            var categoryEntity = mapper.Map<Category>(category);
-
-            //Category categoryEntity = new Category
-            //{
-            //    Description = category.Description,
-            //    Name = category.Name,
-            //    Id = category.Id,
-            //};
-
-            await _repo.AddCategory(categoryEntity);
+            var categoryEntity = mapper.Map<CategoryModel,Category>(category);
+           await _repo.AddCategory(categoryEntity);
         }
 
         public async Task<CategoryModel> GetCategory(int id)
         {
-
             Category categoryEntity = await _repo.GetCategory(id);
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Category, CategoryModel>());
             var mapper = new Mapper(config);
-            var model = mapper.Map<CategoryModel>(categoryEntity);
-
-            //CategoryModel model = new CategoryModel
-            //{
-            //    Description = categoryEntity.Description,
-            //    Id = categoryEntity.Id,
-            //    Name = categoryEntity.Name,
-            //};
-
+            var model = mapper.Map<Category, CategoryModel>(categoryEntity);
             return model;
+        }
+        public async Task UpdateCategory(CategoryModel category)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<CategoryModel, Category>());
+            var mapper = new Mapper(config);
+            var categoryEntity = mapper.Map<CategoryModel, Category>(category);
+            await _repo.UpdateCategory(categoryEntity);
+        }
+
+        public async Task DeleteCategory(int id)
+        {
+            await _repo.DeleteCategory(id);
         }
     }
 }

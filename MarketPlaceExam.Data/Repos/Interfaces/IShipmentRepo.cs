@@ -1,4 +1,4 @@
-﻿using MarketPlace.Entities;
+﻿using MarketPlaceExam.Data.Entities;
 
 namespace MarketPlaceExam.Data.Repos.Interfaces
 {

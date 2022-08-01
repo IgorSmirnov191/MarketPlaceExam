@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MarketPlace.Entities;
+using MarketPlaceExam.Data.Entities;
 using MarketPlace.MVC.Data;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +23,11 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task AddPayment(Payment payment)
         {
-            await _context.Payments.AddAsync(payment);
-            _context.SaveChanges();
+            if (payment != null)
+            {
+                await _context.Payments.AddAsync(payment);
+                _context.SaveChanges();
+            }
         }
 
         public async Task<IEnumerable<Payment>> GetPayments()
@@ -39,15 +42,12 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task UpdatePayment(Payment payment)
         {
-            var paymentlocal = await _context.Payments.FindAsync(payment.Id);
-            if (paymentlocal != null)
+            if (payment != null)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Payment, Payment>());
-                var mapper = new Mapper(config);
-                paymentlocal = mapper.Map<Payment>(payment);
+                _context.Payments.Update(payment);
                 _context.SaveChanges();
-
             }
+
         }
 
         public async Task DeletePayment(int id)

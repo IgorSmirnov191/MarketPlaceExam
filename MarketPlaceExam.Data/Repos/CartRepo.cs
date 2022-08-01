@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MarketPlace.Entities;
+using MarketPlaceExam.Data.Entities;
 using MarketPlace.MVC.Data;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -41,14 +41,10 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task UpdateCart(Cart cart)
         {
-            var cartlocal = await _context.Carts.FindAsync(cart.Id);
-            if (cartlocal != null)
+            if (cart != null)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Cart, Cart>());
-                var mapper = new Mapper(config);
-                cartlocal = mapper.Map<Cart>(cart);
+                _context.Carts.Update(cart);
                 _context.SaveChanges();
-
             }
         }
 

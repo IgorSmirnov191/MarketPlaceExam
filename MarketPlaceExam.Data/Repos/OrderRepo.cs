@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MarketPlace.Entities;
+using MarketPlaceExam.Data.Entities;
 using MarketPlace.MVC.Data;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -42,15 +42,12 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task UpdateOrder(Order orderitem)
         {
-            var orderitemlocal = await _context.Orders.FindAsync(orderitem.Id);
-            if (orderitemlocal != null)
+            if (orderitem != null)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, Order>());
-                var mapper = new Mapper(config);
-                orderitemlocal = mapper.Map<Order>(orderitemlocal);
+                _context.Orders.Update(orderitem);
                 _context.SaveChanges();
-
             }
+
         }
 
         public async Task DeleteOrder(int id)

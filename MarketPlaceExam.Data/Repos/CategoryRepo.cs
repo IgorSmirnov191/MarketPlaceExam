@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MarketPlace.Entities;
+using MarketPlaceExam.Data.Entities;
 using MarketPlace.MVC.Data;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +21,7 @@ namespace MarketPlaceExam.Data.Repos
         {
             if (category != null)
             {
-               await _context.Categories.AddAsync(category);
+              await _context.Categories.AddAsync(category);
                _context.SaveChanges();
             }
         }
@@ -39,14 +39,12 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task UpdateCategory(Category category)
         {
-            var categorylocal = await _context.Categories.FindAsync(category.Id);
-            if (categorylocal != null)
+            if (category != null)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Category, Category>());
-                var mapper = new Mapper(config);
-                categorylocal = mapper.Map<Category>(category);
+                _context.Categories.Update(category);
                 _context.SaveChanges();
             }
+           
         }
 
         public async Task DeleteCategory(int id)

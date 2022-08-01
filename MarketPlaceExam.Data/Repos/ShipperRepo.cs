@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MarketPlace.Entities;
+using MarketPlaceExam.Data.Entities;
 using MarketPlace.MVC.Data;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -42,15 +42,12 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task UpdateShipper(Shipper shipper)
         {
-            var shipperlocal = await _context.Shippers.FindAsync(shipper.Id);
-            if (shipperlocal != null)
+            if (shipper != null)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Shipper, Shipper>());
-                var mapper = new Mapper(config);
-                shipperlocal = mapper.Map<Shipper>(shipper);
+                _context.Shippers.Update(shipper);
                 _context.SaveChanges();
-
             }
+
         }
 
         public async Task DeleteShipper(int id)

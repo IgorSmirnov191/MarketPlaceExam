@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MarketPlace.Entities;
+using MarketPlaceExam.Data.Entities;
 using MarketPlace.MVC.Data;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +23,11 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task AddUser(User user)
         {
-            await _context.Users.AddAsync(user);
-            _context.SaveChanges();
+            if (user != null)
+            {
+                await _context.Users.AddAsync(user);
+                _context.SaveChanges();
+            }
         }
 
         public async Task<IEnumerable<User>> GetUsers()
@@ -39,14 +42,10 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task UpdateUser(User user)
         {
-            var userlocal = await _context.Users.FindAsync(user.Id);
-            if(userlocal != null)
+            if (user != null)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<User, User>());
-                var mapper = new Mapper(config);
-                userlocal = mapper.Map<User>(user);
+                _context.Users.Update(user);
                 _context.SaveChanges();
-
             }
         }
 
