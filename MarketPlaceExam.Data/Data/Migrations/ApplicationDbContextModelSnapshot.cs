@@ -49,7 +49,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.CartItem", b =>
@@ -75,7 +75,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Category", b =>
@@ -97,7 +97,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Order", b =>
@@ -123,7 +123,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Payment", b =>
@@ -206,7 +206,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Payments", (string)null);
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Picture", b =>
@@ -224,7 +224,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pictures", (string)null);
+                    b.ToTable("Pictures");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Product", b =>
@@ -284,7 +284,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Shipment", b =>
@@ -310,10 +310,10 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("ShipperId");
 
-                    b.ToTable("Shipment", (string)null);
+                    b.ToTable("Shipments");
                 });
 
-            modelBuilder.Entity("MarketPlace.Entities.ShipperRepo", b =>
+            modelBuilder.Entity("MarketPlace.Entities.Shipper", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -332,7 +332,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shippers", (string)null);
+                    b.ToTable("Shippers");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Stock", b =>
@@ -353,7 +353,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Stocks", (string)null);
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Supplier", b =>
@@ -407,7 +407,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers", (string)null);
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.User", b =>
@@ -468,7 +468,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -770,7 +770,7 @@ namespace MarketPlace.MVC.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MarketPlace.Entities.ShipperRepo", "ShipperRepo")
+                    b.HasOne("MarketPlace.Entities.Shipper", "Shipper")
                         .WithMany()
                         .HasForeignKey("ShipperId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -778,7 +778,7 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.Navigation("Order");
 
-                    b.Navigation("ShipperRepo");
+                    b.Navigation("Shipper");
                 });
 
             modelBuilder.Entity("MarketPlace.Entities.Stock", b =>
