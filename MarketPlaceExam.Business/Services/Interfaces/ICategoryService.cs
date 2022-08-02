@@ -1,7 +1,7 @@
 ﻿using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Data.Entities;
 
-namespace MarketPlaceExam.Business.Services
+namespace MarketPlaceExam.Business.Services.Interfaces
 {
     public interface ICategoryService
     {

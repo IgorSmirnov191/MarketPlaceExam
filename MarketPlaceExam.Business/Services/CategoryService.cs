@@ -2,6 +2,7 @@
 using MarketPlaceExam.Data.Entities;
 using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Data.Repos.Interfaces;
+using MarketPlaceExam.Business.Services.Interfaces;
 
 namespace MarketPlaceExam.Business.Services
 {

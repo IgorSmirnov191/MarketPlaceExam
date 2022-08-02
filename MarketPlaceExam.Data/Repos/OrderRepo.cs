@@ -20,7 +20,7 @@ namespace MarketPlaceExam.Data.Repos
             _context = context;
         }
 
-        public async Task AddCartItem(Order orderitem)
+        public async Task AddOrder(Order orderitem)
         {
             if (orderitem != null)
             {

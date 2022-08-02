@@ -4,7 +4,7 @@ namespace MarketPlaceExam.Data.Repos.Interfaces
 {
     public interface IOrderRepo
     {
-        Task AddCartItem(Order orderitem);
+        Task AddOrder(Order orderitem);
         Task DeleteOrder(int id);
         Task<Order> GetOrder(int id);
         Task<IEnumerable<Order>> GetOrders();

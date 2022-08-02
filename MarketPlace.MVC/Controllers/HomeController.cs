@@ -1,6 +1,6 @@
 ﻿using MarketPlace.MVC.Models;
 using MarketPlaceExam.Business.Model;
-using MarketPlaceExam.Business.Services;
+using MarketPlaceExam.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
