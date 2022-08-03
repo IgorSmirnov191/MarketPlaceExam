@@ -1,4 +1,5 @@
 using MarketPlace.MVC.Data;
+using MarketPlace.MVC.Models;
 using MarketPlaceExam.Business.Services;
 using MarketPlaceExam.Business.Services.Interfaces;
 using MarketPlaceExam.Data.Repos;
@@ -18,6 +19,15 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+//Transients
+builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<ICartService, CartService>();
+builder.Services.AddTransient<ISupplierService, SupplierService>();
+builder.Services.AddTransient<IPictureService, PictureService>();
+builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IStockService, StockService>();
+
 RegisterServices(builder);
 
 var app = builder.Build();
@@ -32,6 +42,13 @@ else
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
 }
 
 app.UseHttpsRedirection();

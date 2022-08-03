@@ -8,5 +8,6 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task DeleteUser(int id);
         Task<UserModel> GetUser(int id);
         Task UpdateUser(UserModel user);
+        bool IsUsersEmpty();
     }
 }

@@ -8,5 +8,6 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task DeleteCartItem(int id);
         Task<CartItemModel> GetCategory(int id);
         Task UpdateCartItem(CartItemModel cartitem);
+        bool IsCartItemsEmpty();
     }
 }

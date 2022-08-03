@@ -9,5 +9,6 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task<CategoryModel> GetCategory(int id);
         Task UpdateCategory(CategoryModel category);
         Task DeleteCategory(int id);
+        bool IsCategoriesEmpty();
     }
 }

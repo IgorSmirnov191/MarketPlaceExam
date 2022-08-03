@@ -3,6 +3,7 @@ using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Business.Services.Interfaces;
 using MarketPlaceExam.Data.Entities;
 using MarketPlaceExam.Data.Repos.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,11 @@ namespace MarketPlaceExam.Business.Services
         public async Task DeleteCartItem(int id)
         {
             await _repo.DeleteCartItem(id);
+        }
+
+        public bool IsCartItemsEmpty()
+        {
+            return _repo.IsCartItemsEmpty();
         }
     }
 }

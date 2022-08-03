@@ -9,5 +9,6 @@ namespace MarketPlaceExam.Data.Repos.Interfaces
         Task<User> GetUser(int id);
         Task<IEnumerable<User>> GetUsers();
         Task UpdateUser(User user);
+        bool IsUsersEmpty();
     }
 }

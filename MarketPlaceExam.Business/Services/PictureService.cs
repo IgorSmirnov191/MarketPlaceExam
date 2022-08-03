@@ -51,5 +51,10 @@ namespace MarketPlaceExam.Business.Services
         {
             await _repo.DeletePicture(id);
         }
+
+        public bool IsPicturesEmpty()
+        {
+            return _repo.IsPicturesEmpty();
+        }
     }
 }

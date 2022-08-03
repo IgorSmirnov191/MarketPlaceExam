@@ -57,5 +57,9 @@ namespace MarketPlaceExam.Data.Repos
                 _context.SaveChanges();
             }
         }
+        public bool IsCartsEmpty()
+        {
+            return _context.Carts.Any();
+        }
     }
 }

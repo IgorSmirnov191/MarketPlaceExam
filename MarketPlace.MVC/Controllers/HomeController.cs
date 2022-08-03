@@ -9,12 +9,12 @@ namespace MarketPlace.MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICategoryService _service;
+       // private readonly ICategoryService _service;
 
-        public HomeController(ILogger<HomeController> logger, ICategoryService service)
+        public HomeController(ILogger<HomeController> logger/*, ICategoryService service*/)
         {
             _logger = logger;
-            _service = service;
+         //   _service = service;
         }
 
         public IActionResult Index()

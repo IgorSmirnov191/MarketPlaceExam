@@ -59,5 +59,9 @@ namespace MarketPlaceExam.Data.Repos
                 _context.SaveChanges();
             }
         }
+        public bool IsShippersEmpty()
+        {
+            return _context.Shippers.Any();
+        } 
     }
 }

@@ -8,5 +8,6 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task DeleteStock(int id);
         Task<StockModel> GetStock(int id);
         Task UpdateStock(StockModel stock);
+        bool IsStocksEmpty();
     }
 }

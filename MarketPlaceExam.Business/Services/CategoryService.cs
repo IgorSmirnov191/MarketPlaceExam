@@ -22,8 +22,8 @@ namespace MarketPlaceExam.Business.Services
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<CategoryModel, Category>());
             var mapper = new Mapper(config);
-            var categoryEntity = mapper.Map<CategoryModel,Category>(category);
-           await _repo.AddCategory(categoryEntity);
+            var categoryEntity = mapper.Map<CategoryModel, Category>(category);
+            await _repo.AddCategory(categoryEntity);
         }
 
         public async Task<CategoryModel> GetCategory(int id)
@@ -45,6 +45,11 @@ namespace MarketPlaceExam.Business.Services
         public async Task DeleteCategory(int id)
         {
             await _repo.DeleteCategory(id);
+        }
+
+        public bool IsCategoriesEmpty()
+        {
+            return _repo.IsCategoriesEmpty();
         }
     }
 }

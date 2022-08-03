@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
-using MarketPlaceExam.Business.Model;
-using MarketPlaceExam.Business.Services.Interfaces;
 using MarketPlaceExam.Data.Entities;
+using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Data.Repos.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MarketPlaceExam.Business.Services.Interfaces;
 
 namespace MarketPlaceExam.Business.Services
 {
@@ -50,6 +45,11 @@ namespace MarketPlaceExam.Business.Services
         public async Task DeleteCart(int id)
         {
             await _repo.DeleteCart(id);
+        }
+
+        public bool IsCartsEmpty()
+        {
+            return _repo.IsCartsEmpty();
         }
     }
 }

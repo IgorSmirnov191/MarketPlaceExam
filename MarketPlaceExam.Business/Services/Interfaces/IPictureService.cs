@@ -8,5 +8,6 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task DeletePicture(int id);
         Task<PictureModel> GetPicture(int id);
         Task UpdatePicture(PictureModel picture);
+        bool IsPicturesEmpty();
     }
 }

@@ -51,5 +51,10 @@ namespace MarketPlaceExam.Business.Services
         {
             await _repo.DeleteSupplier(id);
         }
+
+        public bool IsSuppliersEmpty()
+        {
+            return _repo.IsSuppliersEmpty();
+        }
     }
 }

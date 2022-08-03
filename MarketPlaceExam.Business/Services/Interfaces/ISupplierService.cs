@@ -8,5 +8,6 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task DeleteSupplier(int id);
         Task<SupplierModel> GetSupplier(int id);
         Task UpdateSupplier(SupplierModel category);
+        bool IsSuppliersEmpty();
     }
 }

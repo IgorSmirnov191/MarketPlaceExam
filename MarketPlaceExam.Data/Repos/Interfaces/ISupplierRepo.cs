@@ -9,5 +9,6 @@ namespace MarketPlaceExam.Data.Repos.Interfaces
         Task<Supplier> GetSupplier(int id);
         Task<IEnumerable<Supplier>> GetSuppliers();
         Task UpdateSupplier(Supplier supplier);
+        bool IsSuppliersEmpty();
     }
 }

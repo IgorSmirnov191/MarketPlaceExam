@@ -9,5 +9,6 @@ namespace MarketPlaceExam.Data.Repos.Interfaces
         Task<Stock> GetStock(int id);
         Task<IEnumerable<Stock>> GetStocks();
         Task UpdateStock(Stock stock);
+        bool IsStocksEmpty();
     }
 }

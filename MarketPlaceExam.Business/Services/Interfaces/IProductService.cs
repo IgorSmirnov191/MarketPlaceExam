@@ -8,5 +8,6 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task DeleteProduct(int id);
         Task<ProductModel> GetProduct(int id);
         Task UpdateProduct(ProductModel product);
+        bool IsProductsEmpty();
     }
 }

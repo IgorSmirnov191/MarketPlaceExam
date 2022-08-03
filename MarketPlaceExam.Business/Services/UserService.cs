@@ -51,5 +51,10 @@ namespace MarketPlaceExam.Business.Services
         {
             await _repo.DeleteUser(id);
         }
+
+        public bool IsUsersEmpty()
+        {
+            return _repo.IsUsersEmpty();
+        }
     }
 }

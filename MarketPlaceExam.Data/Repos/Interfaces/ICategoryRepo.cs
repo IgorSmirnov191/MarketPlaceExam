@@ -9,5 +9,6 @@ namespace MarketPlaceExam.Data.Repos.Interfaces
         Task<IEnumerable<Category>> GetCategories();
         Task<Category> GetCategory(int id);
         Task UpdateCategory(Category category);
+        bool IsCategoriesEmpty();
     }
 }
