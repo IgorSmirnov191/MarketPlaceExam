@@ -16,7 +16,7 @@ namespace MarketPlaceExam.Data.Entities
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [MaxLength(100)]
+        [MaxLength(250)]
         public string? Description { get; set; }
 
         [Required]
@@ -28,7 +28,7 @@ namespace MarketPlaceExam.Data.Entities
         public string City { get; set; }
 
         [Required]
-        [MaxLength(6)]
+        [MaxLength(8)]
         public string ZipCode { get; set; }
 
         [Required]

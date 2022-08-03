@@ -27,7 +27,7 @@ namespace MarketPlaceExam.Data.Entities
         public string PayCity { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(8)]
         public string PayZipCode { get; set; }
      
         [MaxLength(50)]
@@ -48,7 +48,7 @@ namespace MarketPlaceExam.Data.Entities
         public string ShipCity { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(8)]
         public string ShipZipCode { get; set; }
 
         [Required]

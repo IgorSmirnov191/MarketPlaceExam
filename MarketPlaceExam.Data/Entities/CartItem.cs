@@ -15,6 +15,7 @@ namespace MarketPlaceExam.Data.Entities
         public Cart Cart { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
+
         [Required]
         public int Quantity { get; set; }
 

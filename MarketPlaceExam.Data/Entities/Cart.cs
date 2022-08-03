@@ -11,7 +11,7 @@ namespace MarketPlaceExam.Data.Entities
     {
         [Key]
         public int Id { get; set; }
-        [MaxLength(50)]
+        [MaxLength(250)]
         public string? Description { get; set; }
         public int? UserId { get; set; }
         public User User { get; set; }

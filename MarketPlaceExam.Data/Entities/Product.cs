@@ -16,7 +16,7 @@ namespace MarketPlaceExam.Data.Entities
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [MaxLength(200)]
+        [MaxLength(2500)]
         public string? Description { get; set; }
 
         [Required]
@@ -32,7 +32,7 @@ namespace MarketPlaceExam.Data.Entities
 
         public decimal? UnitPrice { get; set; } = 0;
         public double? UnitWeight { get; set; } = 0;
-        public int SuppplierId { get; set; }
+        public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
@@ -45,7 +45,7 @@ namespace MarketPlaceExam.Data.Entities
             return $"Id{Id}, Name: {Name}, Description: {Description}, " +
                 $"Price: {Price}, SKU: {StockKeepUnitId}, Quantity Per Unit: {QuantityPerUnit}, " +
                 $"UnitSize: {UnitSize}, Price Per Unit: {UnitPrice}, UnitWeight: {UnitWeight}" +
-                $"SuppplierId: {SuppplierId}, CategoryId: {CategoryId}" +
+                $"SupplierId: {SupplierId}, CategoryId: {CategoryId}" +
                 $"PictureId: {PictureId}";
         }
     }

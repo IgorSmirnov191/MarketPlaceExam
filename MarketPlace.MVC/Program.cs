@@ -20,15 +20,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 //Transients
-builder.Services.AddTransient<ICategoryService, CategoryService>();
-builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<ICartService, CartService>();
-builder.Services.AddTransient<ISupplierService, SupplierService>();
-builder.Services.AddTransient<IPictureService, PictureService>();
-builder.Services.AddTransient<IProductService, ProductService>();
-builder.Services.AddTransient<IStockService, StockService>();
-
 RegisterServices(builder);
+
 
 var app = builder.Build();
 
@@ -44,12 +37,12 @@ else
     app.UseHsts();
 }
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
+////using (var scope = app.Services.CreateScope())
+////{
+////    var services = scope.ServiceProvider;
 
-    SeedData.Initialize(services);
-}
+////    SeedData.Initialize(services);
+////}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -69,6 +62,30 @@ app.Run();
 // Registrer your services using Dependency Injection here!
 void RegisterServices(WebApplicationBuilder builder)
 {
-    builder.Services.AddTransient<ICategoryService, CategoryService>();
+    // Repositories
+    builder.Services.AddTransient<ICartItemRepo, CartItemRepo>();
+    builder.Services.AddTransient<ICartRepo, CartRepo>();
     builder.Services.AddTransient<ICategoryRepo, CategoryRepo>();
+    builder.Services.AddTransient<IOrderRepo, OrderRepo>();
+    builder.Services.AddTransient<IPaymentRepo, PaymentRepo>();
+    builder.Services.AddTransient<IPictureRepo, PictureRepo>();
+    builder.Services.AddTransient<IProductRepo, ProductRepo>();
+    builder.Services.AddTransient<IShipmentRepo, ShipmentRepo>();
+    builder.Services.AddTransient<IShipperRepo, ShipperRepo>();
+    builder.Services.AddTransient<IStockRepo, StockRepo>();
+    builder.Services.AddTransient<ISupplierRepo, SupplierRepo>();
+    builder.Services.AddTransient<IUserRepo, UserRepo>();
+
+    // Services 
+    builder.Services.AddTransient<ICartItemService, CartItemService>();
+    builder.Services.AddTransient<ICartService, CartService>();
+    builder.Services.AddTransient<ICategoryService, CategoryService>();
+    builder.Services.AddTransient<IOrderService, OrderService>();
+    builder.Services.AddTransient<IPaymentService, PaymentService>();
+    builder.Services.AddTransient<IPictureService, PictureService>();
+    builder.Services.AddTransient<IProductService, ProductService>();
+    builder.Services.AddTransient<IShipmentService, ShipmentService>();
+    builder.Services.AddTransient<IStockService, StockService>();
+    builder.Services.AddTransient<ISupplierService, SupplierService>();
+    builder.Services.AddTransient<IUserService, UserService>();
 }
