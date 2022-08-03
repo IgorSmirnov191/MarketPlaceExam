@@ -37,13 +37,6 @@ else
     app.UseHsts();
 }
 
-////using (var scope = app.Services.CreateScope())
-////{
-////    var services = scope.ServiceProvider;
-
-////    SeedData.Initialize(services);
-////}
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

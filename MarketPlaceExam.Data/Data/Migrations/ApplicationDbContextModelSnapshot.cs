@@ -40,7 +40,7 @@ namespace MarketPlace.MVC.Data.Migrations
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -50,6 +50,15 @@ namespace MarketPlace.MVC.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Carts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AuthToken = "",
+                            Description = "Guest's Cart",
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("MarketPlaceExam.Data.Entities.CartItem", b =>
@@ -418,6 +427,14 @@ namespace MarketPlace.MVC.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Stocks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProductId = 1,
+                            Quantity = 100
+                        });
                 });
 
             modelBuilder.Entity("MarketPlaceExam.Data.Entities.Supplier", b =>
@@ -546,6 +563,18 @@ namespace MarketPlace.MVC.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "guest"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "admin"
+                        });
                 });
 
             modelBuilder.Entity("MarketPlaceExam.Data.Entities.Cart", b =>
@@ -556,7 +585,9 @@ namespace MarketPlace.MVC.Data.Migrations
 
                     b.HasOne("MarketPlaceExam.Data.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Payment");
 

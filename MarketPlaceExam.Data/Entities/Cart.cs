@@ -13,7 +13,7 @@ namespace MarketPlaceExam.Data.Entities
         public int Id { get; set; }
         [MaxLength(250)]
         public string? Description { get; set; }
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
         public int? PaymentId { get; set; }
         public Payment? Payment { get; set; }    

@@ -33,10 +33,53 @@ namespace MarketPlace.MVC.Data
         // TODO: Add Seeding here
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+            SeedUsers(builder);
+            SeedCarts(builder);
             SeedCategories(builder);
             SeedPictures(builder);
             SeedSuppliers(builder);
             SeedProducts(builder);
+            SeedStocks(builder);
+
+        }
+
+        private static void SeedCarts(ModelBuilder builder)
+        {
+            builder.Entity<Cart>().HasData(
+                          new Cart
+                          {
+                              Id = 1,
+                              UserId = 1,
+                              Description = "Guest's Cart",
+                              AuthToken = ""
+                          });
+        }
+
+        private static void SeedStocks(ModelBuilder builder)
+        {
+            builder.Entity<Stock>().HasData(
+                          new Stock
+                          {
+                              Id = 1,
+                              ProductId = 1,
+                              Quantity = 100
+                          });
+        }
+
+        private static void SeedUsers(ModelBuilder builder)
+        {
+            builder.Entity<User>().HasData(
+                            new User
+                            {
+                                Id = 1,
+                                Name = "guest"
+                            },
+                            new User
+                            {
+                                Id = 2,
+                                Name = "admin"
+                            });
         }
 
         private static void SeedPictures(ModelBuilder builder)

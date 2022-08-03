@@ -217,7 +217,7 @@ namespace MarketPlace.MVC.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     PaymentId = table.Column<int>(type: "int", nullable: true),
                     AuthToken = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -233,7 +233,8 @@ namespace MarketPlace.MVC.Data.Migrations
                         name: "FK_Carts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -341,9 +342,28 @@ namespace MarketPlace.MVC.Data.Migrations
                 values: new object[] { 1, "Reactorweg 69", "Utrecht", "", null, "UNITED SOFT DRINKS B.V.", "030 - 2410590", null, "https:///aa-drink.com", "3542 AD" });
 
             migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "AuthToken", "City", "Email", "Name", "Phone", "ShipAddress", "ShipCity", "ShipEmail", "ShipPhone", "ShipZipCode", "ZipCode" },
+                values: new object[,]
+                {
+                    { 1, null, null, null, null, "guest", null, null, null, null, null, null, null },
+                    { 2, null, null, null, null, "admin", null, null, null, null, null, null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Carts",
+                columns: new[] { "Id", "AuthToken", "Description", "PaymentId", "UserId" },
+                values: new object[] { 1, "", "Guest's Cart", null, 1 });
+
+            migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "CategoryId", "Description", "Name", "PictureId", "Price", "QuantityPerUnit", "StockKeepUnitId", "SupplierId", "UnitPrice", "UnitSize", "UnitWeight" },
                 values: new object[] { 1, 1, "AA Drink Hydration Pet 12 x 0.5 liter", "AA Drink Iso Lemon", 1, 12.52m, 12, "AAIsoLemon12x500", 1, 0m, null, 0.0 });
+
+            migrationBuilder.InsertData(
+                table: "Stocks",
+                columns: new[] { "Id", "ProductId", "Quantity" },
+                values: new object[] { 1, 1, 100 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartItems_CartId",
