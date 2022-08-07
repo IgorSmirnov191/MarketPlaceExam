@@ -15,35 +15,28 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private IOrderRepo _repo;
+        private IMapper _mapper;
 
-        public OrderService(IOrderRepo repo)
+        public OrderService(IOrderRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
-
-        // TODO: Perform mappings using Automapper instead of manually.
-        // TODO: CRUD.
         public async Task AddOrder(OrderModel category)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderModel, Order>());
-            var mapper = new Mapper(config);
-            var orderEntity = mapper.Map<OrderModel, Order>(category);
+            var orderEntity = _mapper.Map<OrderModel, Order>(category);
             await _repo.AddOrder(orderEntity);
         }
 
         public async Task<OrderModel> GetOrder(int id)
         {
             Order orderEntity = await _repo.GetOrder(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderModel>());
-            var mapper = new Mapper(config);
-            var model = mapper.Map<Order, OrderModel>(orderEntity);
+            var model = _mapper.Map<Order, OrderModel>(orderEntity);
             return model;
         }
         public async Task UpdateOrder(OrderModel order)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderModel, Order>());
-            var mapper = new Mapper(config);
-            var orderEntity = mapper.Map<OrderModel, Order>(order);
+            var orderEntity = _mapper.Map<OrderModel, Order>(order);
             await _repo.UpdateOrder(orderEntity);
         }
 

@@ -15,35 +15,28 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private IShipmentRepo _repo;
-
-        public ShipmentService(IShipmentRepo repo)
+        private IMapper _mapper;
+        public ShipmentService(IShipmentRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
-        // TODO: Perform mappings using Automapper instead of manually.
-        // TODO: CRUD.
         public async Task AddShipment(ShipmentModel shipment)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ShipmentModel, Shipment>());
-            var mapper = new Mapper(config);
-            var shipmentEntity = mapper.Map<ShipmentModel, Shipment>(shipment);
+            var shipmentEntity = _mapper.Map<ShipmentModel, Shipment>(shipment);
             await _repo.AddShipment(shipmentEntity);
         }
 
         public async Task<ShipmentModel> GetShipment(int id)
         {
             Shipment shipmentEntity = await _repo.GetShipment(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Shipment, ShipmentModel>());
-            var mapper = new Mapper(config);
-            var model = mapper.Map<Shipment, ShipmentModel>(shipmentEntity);
+            var model = _mapper.Map<Shipment, ShipmentModel>(shipmentEntity);
             return model;
         }
         public async Task UpdateShipment(ShipmentModel shipment)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ShipmentModel, Shipment>());
-            var mapper = new Mapper(config);
-            var shipmentEntity = mapper.Map<ShipmentModel, Shipment>(shipment);
+            var shipmentEntity = _mapper.Map<ShipmentModel, Shipment>(shipment);
             await _repo.UpdateShipment(shipmentEntity);
         }
 

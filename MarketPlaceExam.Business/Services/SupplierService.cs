@@ -15,35 +15,28 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private ISupplierRepo _repo;
+        private IMapper _mapper;
 
-        public SupplierService(ISupplierRepo repo)
+        public SupplierService(ISupplierRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
-
-        // TODO: Perform mappings using Automapper instead of manually.
-        // TODO: CRUD.
         public async Task AddSupplier(SupplierModel supplier)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CategoryModel, Category>());
-            var mapper = new Mapper(config);
-            var supplierEntity = mapper.Map<SupplierModel, Supplier>(supplier);
+            var supplierEntity = _mapper.Map<SupplierModel, Supplier>(supplier);
             await _repo.AddSupplier(supplierEntity);
         }
 
         public async Task<SupplierModel> GetSupplier(int id)
         {
             Supplier supplierEntity = await _repo.GetSupplier(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Supplier, SupplierModel>());
-            var mapper = new Mapper(config);
-            var model = mapper.Map<Supplier, SupplierModel>(supplierEntity);
+            var model = _mapper.Map<Supplier, SupplierModel>(supplierEntity);
             return model;
         }
         public async Task UpdateSupplier(SupplierModel category)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<SupplierModel, Supplier>());
-            var mapper = new Mapper(config);
-            var supplierEntity = mapper.Map<SupplierModel, Supplier>(category);
+            var supplierEntity = _mapper.Map<SupplierModel, Supplier>(category);
             await _repo.UpdateSupplier(supplierEntity);
         }
 

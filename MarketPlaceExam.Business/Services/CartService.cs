@@ -10,35 +10,29 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private ICartRepo _repo;
+        private IMapper _mapper;
 
-        public CartService(ICartRepo repo)
+        public CartService(ICartRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
-        // TODO: Perform mappings using Automapper instead of manually.
-        // TODO: CRUD.
         public async Task AddCart(CartModel cart)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CartModel, Cart>());
-            var mapper = new Mapper(config);
-            var cartEntity = mapper.Map<CartModel, Cart>(cart);
+            var cartEntity = _mapper.Map<CartModel, Cart>(cart);
             await _repo.AddCart(cartEntity);
         }
 
         public async Task<CartModel> GetCart(int id)
         {
             Cart cartEntity = await _repo.GetCart(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Cart, CartModel>());
-            var mapper = new Mapper(config);
-            var model = mapper.Map<Cart, CartModel>(cartEntity);
+            var model = _mapper.Map<Cart, CartModel>(cartEntity);
             return model;
         }
         public async Task UpdateCart(CartModel cart)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CartModel, Cart>());
-            var mapper = new Mapper(config);
-            var cartEntity = mapper.Map<CartModel, Cart>(cart);
+            var cartEntity = _mapper.Map<CartModel, Cart>(cart);
             await _repo.UpdateCart(cartEntity);
         }
 

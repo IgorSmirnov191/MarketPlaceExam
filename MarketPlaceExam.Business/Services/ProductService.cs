@@ -15,35 +15,31 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private IProductRepo _repo;
+        private IMapper _mapper;
 
-        public ProductService(IProductRepo repo)
+        public ProductService(IProductRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
-        // TODO: Perform mappings using Automapper instead of manually.
-        // TODO: CRUD.
+        // TODO: Put AutoMapperConfigs in their own config file (Google Automapper Profile class)
+        // TODO: ONLY IF ENOUGH TIME -> Veel duplicate code -> Generieke class?
         public async Task AddProduct(ProductModel product)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductModel, Product>());
-            var mapper = new Mapper(config);
-            var productEntity = mapper.Map<ProductModel, Product>(product);
+            var productEntity = _mapper.Map<ProductModel, Product>(product);
             await _repo.AddProduct(productEntity);
         }
 
         public async Task<ProductModel> GetProduct(int id)
         {
             Product productEntity = await _repo.GetProduct(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductModel>());
-            var mapper = new Mapper(config);
-            var model = mapper.Map<Product, ProductModel>(productEntity);
+            var model = _mapper.Map<Product, ProductModel>(productEntity);
             return model;
         }
         public async Task UpdateProduct(ProductModel product)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductModel, Product>());
-            var mapper = new Mapper(config);
-            var productEntity = mapper.Map<ProductModel, Product>(product);
+            var productEntity = _mapper.Map<ProductModel, Product>(product);
             await _repo.UpdateProduct(productEntity);
         }
 

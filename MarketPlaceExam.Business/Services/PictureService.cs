@@ -15,35 +15,27 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private IPictureRepo _repo;
-
-        public PictureService(IPictureRepo repo)
+        private IMapper _mapper;
+        public PictureService(IPictureRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
-
-        // TODO: Perform mappings using Automapper instead of manually.
-        // TODO: CRUD.
         public async Task AddPicture(PictureModel picture)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<PictureModel, Picture>());
-            var mapper = new Mapper(config);
-            var pictureEntity = mapper.Map<PictureModel, Picture>(picture);
+            var pictureEntity = _mapper.Map<PictureModel, Picture>(picture);
             await _repo.AddPicture(pictureEntity);
         }
 
         public async Task<PictureModel> GetPicture(int id)
         {
             Picture pictureEntity = await _repo.GetPicture(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Picture, PictureModel>());
-            var mapper = new Mapper(config);
-            var model = mapper.Map<Picture, PictureModel>(pictureEntity);
+            var model = _mapper.Map<Picture, PictureModel>(pictureEntity);
             return model;
         }
         public async Task UpdatePicture(PictureModel picture)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<PictureModel, Picture>());
-            var mapper = new Mapper(config);
-            var pictureEntity = mapper.Map<PictureModel, Picture>(picture);
+            var pictureEntity = _mapper.Map<PictureModel, Picture>(picture);
             await _repo.UpdatePicture(pictureEntity);
         }
 

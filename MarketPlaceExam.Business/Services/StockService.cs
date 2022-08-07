@@ -15,35 +15,28 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private IStockRepo _repo;
+        private IMapper _mapper;
 
-        public StockService(IStockRepo repo)
+        public StockService(IStockRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
-
-        // TODO: Perform mappings using Automapper instead of manually.
-        // TODO: CRUD.
         public async Task AddStock(StockModel stock)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<StockModel, Stock>());
-            var mapper = new Mapper(config);
-            var stockEntity = mapper.Map<StockModel, Stock>(stock);
+            var stockEntity = _mapper.Map<StockModel, Stock>(stock);
             await _repo.AddStock(stockEntity);
         }
 
         public async Task<StockModel> GetStock(int id)
         {
             Stock stockEntity = await _repo.GetStock(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Stock, StockModel>());
-            var mapper = new Mapper(config);
-            var model = mapper.Map<Stock, StockModel>(stockEntity);
+            var model = _mapper.Map<Stock, StockModel>(stockEntity);
             return model;
         }
         public async Task UpdateStock(StockModel stock)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<StockModel, Stock>());
-            var mapper = new Mapper(config);
-            var stockEntity = mapper.Map<StockModel, Stock>(stock);
+            var stockEntity = _mapper.Map<StockModel, Stock>(stock);
             await _repo.UpdateStock(stockEntity);
         }
 

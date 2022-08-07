@@ -15,35 +15,28 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private IUserRepo _repo;
+        private IMapper _mapper;
 
-        public UserService(IUserRepo repo)
+        public UserService(IUserRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
-
-        // TODO: Perform mappings using Automapper instead of manually.
-        // TODO: CRUD.
         public async Task AddUser(UserModel user)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<UserModel, User>());
-            var mapper = new Mapper(config);
-            var userEntity = mapper.Map<UserModel, User>(user);
+            var userEntity = _mapper.Map<UserModel, User>(user);
             await _repo.AddUser(userEntity);
         }
 
         public async Task<UserModel> GetUser(int id)
         {
             User userEntity = await _repo.GetUser(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserModel>());
-            var mapper = new Mapper(config);
-            var model = mapper.Map<User, UserModel>(userEntity);
+            var model = _mapper.Map<User, UserModel>(userEntity);
             return model;
         }
         public async Task UpdateUser(UserModel user)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<UserModel, User>());
-            var mapper = new Mapper(config);
-            var userEntity = mapper.Map<UserModel, User>(user);
+            var userEntity = _mapper.Map<UserModel, User>(user);
             await _repo.UpdateUser(userEntity);
         }
 

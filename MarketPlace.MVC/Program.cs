@@ -1,5 +1,5 @@
 using MarketPlace.MVC.Data;
-using MarketPlace.MVC.Models;
+using MarketPlaceExam.Business.Configuration;
 using MarketPlaceExam.Business.Services;
 using MarketPlaceExam.Business.Services.Interfaces;
 using MarketPlaceExam.Data.Repos;
@@ -21,7 +21,6 @@ builder.Services.AddControllersWithViews();
 
 //Transients
 RegisterServices(builder);
-
 
 var app = builder.Build();
 
@@ -52,33 +51,46 @@ app.MapRazorPages();
 
 app.Run();
 
-// Registrer your services using Dependency Injection here!
+// DI Register
 void RegisterServices(WebApplicationBuilder builder)
 {
-    // Repositories
-    builder.Services.AddTransient<ICartItemRepo, CartItemRepo>();
-    builder.Services.AddTransient<ICartRepo, CartRepo>();
-    builder.Services.AddTransient<ICategoryRepo, CategoryRepo>();
-    builder.Services.AddTransient<IOrderRepo, OrderRepo>();
-    builder.Services.AddTransient<IPaymentRepo, PaymentRepo>();
-    builder.Services.AddTransient<IPictureRepo, PictureRepo>();
-    builder.Services.AddTransient<IProductRepo, ProductRepo>();
-    builder.Services.AddTransient<IShipmentRepo, ShipmentRepo>();
-    builder.Services.AddTransient<IShipperRepo, ShipperRepo>();
-    builder.Services.AddTransient<IStockRepo, StockRepo>();
-    builder.Services.AddTransient<ISupplierRepo, SupplierRepo>();
-    builder.Services.AddTransient<IUserRepo, UserRepo>();
+    RegisterRepositories(builder.Services);
+    RegisterBusinessServices(builder.Services);
+    RegisterAutoMapper(builder.Services);
+}
 
-    // Services 
-    builder.Services.AddTransient<ICartItemService, CartItemService>();
-    builder.Services.AddTransient<ICartService, CartService>();
-    builder.Services.AddTransient<ICategoryService, CategoryService>();
-    builder.Services.AddTransient<IOrderService, OrderService>();
-    builder.Services.AddTransient<IPaymentService, PaymentService>();
-    builder.Services.AddTransient<IPictureService, PictureService>();
-    builder.Services.AddTransient<IProductService, ProductService>();
-    builder.Services.AddTransient<IShipmentService, ShipmentService>();
-    builder.Services.AddTransient<IStockService, StockService>();
-    builder.Services.AddTransient<ISupplierService, SupplierService>();
-    builder.Services.AddTransient<IUserService, UserService>();
+void RegisterAutoMapper(IServiceCollection services)
+{
+    services.AddAutoMapper(typeof(BusinessMapperProfile));
+}
+
+void RegisterBusinessServices(IServiceCollection services)
+{
+    services.AddTransient<ICartItemService, CartItemService>();
+    services.AddTransient<ICartService, CartService>();
+    services.AddTransient<ICategoryService, CategoryService>();
+    services.AddTransient<IOrderService, OrderService>();
+    services.AddTransient<IPaymentService, PaymentService>();
+    services.AddTransient<IPictureService, PictureService>();
+    services.AddTransient<IProductService, ProductService>();
+    services.AddTransient<IShipmentService, ShipmentService>();
+    services.AddTransient<IStockService, StockService>();
+    services.AddTransient<ISupplierService, SupplierService>();
+    services.AddTransient<IUserService, UserService>();
+}
+
+void RegisterRepositories(IServiceCollection services)
+{
+    services.AddTransient<ICartItemRepo, CartItemRepo>();
+    services.AddTransient<ICartRepo, CartRepo>();
+    services.AddTransient<ICategoryRepo, CategoryRepo>();
+    services.AddTransient<IOrderRepo, OrderRepo>();
+    services.AddTransient<IPaymentRepo, PaymentRepo>();
+    services.AddTransient<IPictureRepo, PictureRepo>();
+    services.AddTransient<IProductRepo, ProductRepo>();
+    services.AddTransient<IShipmentRepo, ShipmentRepo>();
+    services.AddTransient<IShipperRepo, ShipperRepo>();
+    services.AddTransient<IStockRepo, StockRepo>();
+    services.AddTransient<ISupplierRepo, SupplierRepo>();
+    services.AddTransient<IUserRepo, UserRepo>();
 }

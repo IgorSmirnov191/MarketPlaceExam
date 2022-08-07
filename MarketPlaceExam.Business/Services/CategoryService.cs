@@ -10,35 +10,30 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private ICategoryRepo _repo;
+        private IMapper _mapper;
 
-        public CategoryService(ICategoryRepo repo)
+        public CategoryService(ICategoryRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
-        // TODO: Perform mappings using Automapper instead of manually.
-        // TODO: CRUD.
         public async Task AddCategory(CategoryModel category)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CategoryModel, Category>());
-            var mapper = new Mapper(config);
-            var categoryEntity = mapper.Map<CategoryModel, Category>(category);
+          
+            var categoryEntity = _mapper.Map<CategoryModel, Category>(category);
             await _repo.AddCategory(categoryEntity);
         }
 
         public async Task<CategoryModel> GetCategory(int id)
         {
             Category categoryEntity = await _repo.GetCategory(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Category, CategoryModel>());
-            var mapper = new Mapper(config);
-            var model = mapper.Map<Category, CategoryModel>(categoryEntity);
+            var model = _mapper.Map<Category, CategoryModel>(categoryEntity);
             return model;
         }
         public async Task UpdateCategory(CategoryModel category)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CategoryModel, Category>());
-            var mapper = new Mapper(config);
-            var categoryEntity = mapper.Map<CategoryModel, Category>(category);
+            var categoryEntity = _mapper.Map<CategoryModel, Category>(category);
             await _repo.UpdateCategory(categoryEntity);
         }
 

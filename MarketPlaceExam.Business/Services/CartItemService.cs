@@ -3,12 +3,6 @@ using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Business.Services.Interfaces;
 using MarketPlaceExam.Data.Entities;
 using MarketPlaceExam.Data.Repos.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MarketPlaceExam.Business.Services
 {
@@ -16,35 +10,30 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private ICartItemRepo _repo;
+        private IMapper _mapper;
 
-        public CartItemService(ICartItemRepo repo)
+        public CartItemService(ICartItemRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
-        // TODO: Perform mappings using Automapper instead of manually.
-        // TODO: CRUD.
         public async Task AddCartItem(CartItemModel cartitem)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CartItemModel, CartItem>());
-            var mapper = new Mapper(config);
-            var cartitemEntity = mapper.Map<CartItemModel, CartItem>(cartitem);
+            var cartitemEntity = _mapper.Map<CartItemModel, CartItem>(cartitem);
             await _repo.AddCartItem(cartitemEntity);
         }
 
         public async Task<CartItemModel> GetCategory(int id)
         {
             CartItem cartitemEntity = await _repo.GetCartItem(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CartItem, CartItemModel>());
-            var mapper = new Mapper(config);
-            var model = mapper.Map<CartItem, CartItemModel>(cartitemEntity);
+            var model = _mapper.Map<CartItem, CartItemModel>(cartitemEntity);
             return model;
         }
+
         public async Task UpdateCartItem(CartItemModel cartitem)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CartItemModel, CartItem>());
-            var mapper = new Mapper(config);
-            var cartitemEntity = mapper.Map<CartItemModel, CartItem>(cartitem);
+            var cartitemEntity = _mapper.Map<CartItemModel, CartItem>(cartitem);
             await _repo.UpdateCartItem(cartitemEntity);
         }
 
