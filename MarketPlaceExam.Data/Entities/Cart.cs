@@ -13,17 +13,17 @@ namespace MarketPlaceExam.Data.Entities
         public int Id { get; set; }
         [MaxLength(250)]
         public string? Description { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string? UserId { get; set; }
+        public User? User { get; set; }
         public int? PaymentId { get; set; }
-        public Payment? Payment { get; set; }    
-        public string? AuthToken { get; set; }
-        
+        public Payment? Payment { get; set; }
+
+
         //todo data annotation
 
         public override string ToString()
         {
-            return $"Id{Id}, UserId: {UserId}, PaymentId: {PaymentId}";
+            return $"Id{Id}, UserId: {UserId}";
         }
     }
 }

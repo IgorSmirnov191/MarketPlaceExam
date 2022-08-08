@@ -11,8 +11,8 @@ namespace MarketPlaceExam.Data.Entities
     {
         [Key]
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; } 
+        public string? UserId { get; set; }
+        public User? User { get; set; } 
         
         [Required]
         [MaxLength(50)]
@@ -60,8 +60,7 @@ namespace MarketPlaceExam.Data.Entities
 
         [Required]
         public decimal Total { get; set; } = 0;
-        public string? AuthToken { get; set; }
-
+       
         public List<Cart> Carts { get; set; }
         public override string ToString()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,14 +8,9 @@ using System.Threading.Tasks;
 
 namespace MarketPlaceExam.Data.Entities
 {
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        public int Id { get; set; }
-        [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
-       
+              
         [MaxLength(50)]
         public string? Address { get; set; }
         
@@ -23,13 +19,7 @@ namespace MarketPlaceExam.Data.Entities
         
         [MaxLength(8)]
         public string? ZipCode { get; set; }
-       
-        [MaxLength(50)]
-        public string? Phone { get; set; }
-        
-        [MaxLength(50)]
-        public string? Email { get; set; }
-        
+            
         [MaxLength(50)]
         public string? ShipAddress { get; set; }
         
@@ -40,19 +30,18 @@ namespace MarketPlaceExam.Data.Entities
         public string? ShipZipCode { get; set; }
        
         [MaxLength(50)]
-        public string? ShipPhone { get; set; }
+        public string? ShipPhoneNumber { get; set; }
       
         [MaxLength(50)]
         public string? ShipEmail { get; set; }
-        public string? AuthToken { get; set; }
 
         public override string ToString()
         {
-            return $"Id{Id}, Name: {Name}, " +
+            return $"Id{Id}, Name: {UserName}, " +
                 $"Address: {Address}, City: {City}, ZipCode: {ZipCode}, " +
-                $"Phone: {Phone}, Email: {Email}" +
+                $"Phone: {PhoneNumber}, Email: {Email}" +
                 $"ShipAddress: {ShipAddress}, ShipCity: {ShipCity}, ShipZipCode: {ShipZipCode}," +
-                $"ShipPhone: {ShipPhone}, Email: {ShipEmail}";
+                $"ShipPhone: {ShipPhoneNumber}, Email: {ShipEmail}";
         }
     }
 }

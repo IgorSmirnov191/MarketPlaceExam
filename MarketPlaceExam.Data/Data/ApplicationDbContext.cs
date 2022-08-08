@@ -1,15 +1,18 @@
 ﻿using MarketPlaceExam.Data.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Principal;
 
 namespace MarketPlace.MVC.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-
+        static string Guid_guest = Guid.NewGuid().ToString();
         public DbSet<Cart> Carts { get; set; }
 
         public DbSet<CartItem> CartItems { get; set; }
@@ -30,10 +33,12 @@ namespace MarketPlace.MVC.Data
 
         public DbSet<User> Users { get; set; }
 
-        // TODO: Add Seeding here
+     //   public DbSet<IdentityUser> IdentityUsers { get; set; }
+
+     
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
+          
             SeedUsers(builder);
             SeedCarts(builder);
             SeedCategories(builder);
@@ -41,6 +46,7 @@ namespace MarketPlace.MVC.Data
             SeedSuppliers(builder);
             SeedProducts(builder);
             SeedStocks(builder);
+            base.OnModelCreating(builder);
 
         }
 
@@ -50,9 +56,9 @@ namespace MarketPlace.MVC.Data
                           new Cart
                           {
                               Id = 1,
-                              UserId = 1,
+                              UserId = Guid_guest,
                               Description = "Guest's Cart",
-                              AuthToken = ""
+                           
                           });
         }
 
@@ -72,15 +78,17 @@ namespace MarketPlace.MVC.Data
             builder.Entity<User>().HasData(
                             new User
                             {
-                                Id = 1,
-                                Name = "guest"
-                            },
-                            new User
-                            {
-                                Id = 2,
-                                Name = "admin"
-                            });
+                                Id = Guid_guest,
+                                UserName = "guest",
+                                AccessFailedCount = 1,
+                                EmailConfirmed = true,
+                                LockoutEnabled = false,
+                                PhoneNumberConfirmed = true,
+                                TwoFactorEnabled = false
+                            }
+                           );
         }
+      
 
         private static void SeedPictures(ModelBuilder builder)
         {

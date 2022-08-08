@@ -1,4 +1,17 @@
-﻿@{
+﻿@using MarketPlaceExam.Data.Entities
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>Hello @User.Identity.Name!</p>
+}
+else
+{
+    <p>You're not signed in!</p>
+}
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>

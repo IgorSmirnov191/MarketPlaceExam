@@ -2,6 +2,7 @@ using MarketPlace.MVC.Data;
 using MarketPlaceExam.Business.Configuration;
 using MarketPlaceExam.Business.Services;
 using MarketPlaceExam.Business.Services.Interfaces;
+using MarketPlaceExam.Data.Entities;
 using MarketPlaceExam.Data.Repos;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
