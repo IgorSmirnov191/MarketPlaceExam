@@ -24,8 +24,4 @@
     <ProjectReference Include="..\MarketPlaceExam.Business\MarketPlaceExam.Business.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Identity\Data\" />
-  </ItemGroup>
-
 </Project>

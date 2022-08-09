@@ -28,7 +28,8 @@ namespace MarketPlaceExam.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     ZipCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true),
@@ -431,8 +432,8 @@ namespace MarketPlaceExam.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "City", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "ShipAddress", "ShipCity", "ShipEmail", "ShipPhoneNumber", "ShipZipCode", "TwoFactorEnabled", "UserName", "ZipCode" },
-                values: new object[] { "2716d0e9-2143-420d-9b37-99d37fce7863", 0, null, null, "80f19619-e04a-43ef-b8ad-a478dc20ef90", "User", null, true, false, null, null, null, null, null, true, "a8c78908-7a9f-40fb-91b4-4c34077121ef", null, null, null, null, null, false, "guest", null });
+                columns: new[] { "Id", "AccessFailedCount", "Address", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "ShipAddress", "ShipCity", "ShipEmail", "ShipPhoneNumber", "ShipZipCode", "TwoFactorEnabled", "UserName", "ZipCode" },
+                values: new object[] { "5942b6e9-7578-47db-abcb-37ae302d123d", 1, null, null, "61211b39-ba37-491a-86bf-fbce0e52dba8", null, true, null, null, false, null, null, null, null, null, true, "89a070dd-97a3-49d9-8dc9-2149ab432f29", null, null, null, null, null, false, "guest", null });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -461,7 +462,7 @@ namespace MarketPlaceExam.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Carts",
                 columns: new[] { "Id", "Description", "PaymentId", "UserId" },
-                values: new object[] { 1, "Guest's Cart", null, "2716d0e9-2143-420d-9b37-99d37fce7863" });
+                values: new object[] { 1, "Guest's Cart", null, "5942b6e9-7578-47db-abcb-37ae302d123d" });
 
             migrationBuilder.InsertData(
                 table: "Products",

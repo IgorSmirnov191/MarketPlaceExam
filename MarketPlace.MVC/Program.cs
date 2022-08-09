@@ -1,29 +1,33 @@
-using MarketPlace.MVC.Data;
+
 using MarketPlaceExam.Business.Configuration;
 using MarketPlaceExam.Business.Services;
 using MarketPlaceExam.Business.Services.Interfaces;
-using MarketPlaceExam.Data.Entities;
+
 using MarketPlaceExam.Data.Repos;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MarketPlaceExam.Data.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<MarketPlaceExam.Data.Data.ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<MarketPlaceExam.Data.Entities.User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<MarketPlaceExam.Data.Data.ApplicationDbContext>()
+    .AddDefaultTokenProviders()
+    .AddDefaultUI();
 builder.Services.AddControllersWithViews();
 
 //Transients
 RegisterServices(builder);
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

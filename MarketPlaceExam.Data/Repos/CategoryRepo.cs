@@ -1,8 +1,7 @@
-﻿using AutoMapper;
-using MarketPlaceExam.Data.Entities;
-using MarketPlace.MVC.Data;
+﻿using MarketPlaceExam.Data.Entities;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using MarketPlaceExam.Data.Data;
 
 namespace MarketPlaceExam.Data.Repos
 {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
 
-namespace MarketPlace.MVC.Data
+namespace MarketPlaceExam.Data.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {
@@ -33,7 +33,7 @@ namespace MarketPlace.MVC.Data
 
         public DbSet<User> Users { get; set; }
 
-     //   public DbSet<IdentityUser> IdentityUsers { get; set; }
+     
 
      
         protected override void OnModelCreating(ModelBuilder builder)
@@ -80,11 +80,11 @@ namespace MarketPlace.MVC.Data
                             {
                                 Id = Guid_guest,
                                 UserName = "guest",
-                                AccessFailedCount = 1,
+                                Email = "guest@sport_supplements.com",
+                                FirstName = "Guest",
+                                LastName = "Sport Supplements Market",
                                 EmailConfirmed = true,
-                                LockoutEnabled = false,
-                                PhoneNumberConfirmed = true,
-                                TwoFactorEnabled = false
+                                PhoneNumberConfirmed = true
                             }
                            );
         }
