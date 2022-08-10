@@ -19,6 +19,7 @@ namespace MarketPlaceExam.Data.Entities
         public Payment? Payment { get; set; }
 
 
+
         //todo data annotation
 
         public override string ToString()

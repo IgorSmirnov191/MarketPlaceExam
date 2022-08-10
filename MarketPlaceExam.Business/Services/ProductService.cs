@@ -3,11 +3,6 @@ using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Business.Services.Interfaces;
 using MarketPlaceExam.Data.Entities;
 using MarketPlaceExam.Data.Repos.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MarketPlaceExam.Business.Services
 {
@@ -23,8 +18,6 @@ namespace MarketPlaceExam.Business.Services
             _mapper = mapper;
         }
 
-        // TODO: Put AutoMapperConfigs in their own config file (Google Automapper Profile class)
-        // TODO: ONLY IF ENOUGH TIME -> Veel duplicate code -> Generieke class?
         public async Task AddProduct(ProductModel product)
         {
             var productEntity = _mapper.Map<ProductModel, Product>(product);
@@ -51,6 +44,28 @@ namespace MarketPlaceExam.Business.Services
         public bool IsProductsEmpty()
         {
             return _repo.IsProductsEmpty();
+        }
+
+        public async Task<IEnumerable<ProductModel>> GetAllProducts()
+        {
+            var productEntity =  await _repo.GetProducts();
+            var model = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductModel>>(productEntity);
+            return model;
+            
+        }
+
+        public async Task<IEnumerable<ProductModel>> GetProductsBySupplier(int supplierId)
+        {
+            var productEntity = await _repo.GetProductsBySupplierId(supplierId);
+            var model = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductModel>>(productEntity);
+            return model;
+        }
+
+        public async Task<IEnumerable<ProductModel>> GetProductsByCategory(int categoryId)
+        {
+            var productEntity = await _repo.GetProductsByCategoryId(categoryId);
+            var model = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductModel>>(productEntity);
+            return model;
         }
     }
 }

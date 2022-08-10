@@ -14,6 +14,7 @@ namespace MarketPlaceExam.Data.Repos
             _context = context;
         }
 
+        
         public async Task AddSupplier(Supplier supplier)
         {
             if (supplier != null)

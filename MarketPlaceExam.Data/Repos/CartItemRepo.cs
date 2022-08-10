@@ -14,6 +14,8 @@ namespace MarketPlaceExam.Data.Repos
             _context = context;
         }
 
+       
+
         public async Task AddCartItem(CartItem cartitem)
         {
             if (cartitem != null)
@@ -26,7 +28,11 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task<IEnumerable<CartItem>> GetCartItems()
         {
-            return await _context.CartItems.ToListAsync();
+            return await _context
+                .CartItems
+                .Include(x => x.Cart)
+                .Include(x => x.Product)
+                .ToListAsync();
         }
 
         public async Task<CartItem> GetCartItem(int id)
@@ -52,9 +58,20 @@ namespace MarketPlaceExam.Data.Repos
                 _context.SaveChanges();
             }
         }
+        
         public bool IsCartItemsEmpty() 
         { 
             return _context.CartItems.Any();
+        }
+
+        public async Task<IEnumerable<CartItem>> GetAllCartItemsByCart(int cartid)
+        {
+            return await _context
+               .CartItems
+               .Include(x => x.Cart)
+               .Include(x => x.Product)
+               .Where(x=> x.CartId == cartid)
+               .ToListAsync();
         }
     }
 }

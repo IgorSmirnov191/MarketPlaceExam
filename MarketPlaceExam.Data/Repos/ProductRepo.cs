@@ -1,7 +1,7 @@
-﻿using MarketPlaceExam.Data.Entities;
+﻿using MarketPlaceExam.Data.Data;
+using MarketPlaceExam.Data.Entities;
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using MarketPlaceExam.Data.Data;
 
 namespace MarketPlaceExam.Data.Repos
 {
@@ -16,7 +16,6 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task AddProduct(Product product)
         {
-          
             if (product != null)
             {
                 await _context.Products.AddAsync(product);
@@ -26,7 +25,12 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            return await _context
+                .Products
+                .Include(x => x.Supplier)
+                .Include(x => x.Category)
+                .Include(x => x.Picture)
+                .ToListAsync();
         }
 
         public async Task<Product> GetProduct(int id)
@@ -52,9 +56,55 @@ namespace MarketPlaceExam.Data.Repos
                 _context.SaveChanges();
             }
         }
+
         public bool IsProductsEmpty()
         {
             return _context.Products.Any();
-        } 
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsBySupplierId(int supplierId)
+        {
+            return await _context
+                .Products
+                .Include(x => x.Supplier)
+                .Include(x => x.Category)
+                .Include(x => x.Picture)
+                .Where(x => x.SupplierId == supplierId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByCategoryId(int categoryId)
+        {
+            return await _context
+               .Products
+               .Include(x => x.Supplier)
+               .Include(x => x.Category)
+               .Include(x => x.Picture)
+               .Where(x => x.CategoryId == categoryId)
+               .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByNameAndCategory(string name, string category)
+        {
+            return await _context
+               .Products
+               .Include(x => x.Supplier)
+               .Include(x => x.Category)
+               .Include(x => x.Picture)
+               .Where(x => x.Name == name)
+               .Where(x => x.Category.Name == category)
+               .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByName(string name)
+        {
+            return await _context
+                .Products
+                .Include(x => x.Supplier)
+                .Include(x => x.Category)
+                .Include(x => x.Picture)
+                .Where(x => x.Name == name)
+                .ToListAsync();
+        }
     }
 }

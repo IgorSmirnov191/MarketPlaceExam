@@ -14,6 +14,7 @@ namespace MarketPlaceExam.Data.Repos
             _context = context;
         }
 
+       
         public async Task AddShipment(Shipment shipment)
         {
             if (shipment != null)
@@ -26,7 +27,11 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task<IEnumerable<Shipment>> GetShipments()
         {
-            return await _context.Shipments.ToListAsync();
+            return await _context
+                .Shipments
+                .Include(x=> x.Order)
+                .Include(x=> x.Shipper)
+                .ToListAsync();
         }
 
         public async Task<Shipment> GetShipment(int id)

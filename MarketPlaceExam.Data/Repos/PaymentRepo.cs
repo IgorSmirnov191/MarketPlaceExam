@@ -15,6 +15,7 @@ namespace MarketPlaceExam.Data.Repos
             _context = context;
         }
 
+        
         public async Task AddPayment(Payment payment)
         {
             if (payment != null)
@@ -26,7 +27,11 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task<IEnumerable<Payment>> GetPayments()
         {
-            return await _context.Payments.ToListAsync();
+            return await _context
+                .Payments
+                .Include( x => x.Carts)
+                .Include( x=> x.User)
+                .ToListAsync();
         }
 
         public async Task<Payment> GetPayment(int id)

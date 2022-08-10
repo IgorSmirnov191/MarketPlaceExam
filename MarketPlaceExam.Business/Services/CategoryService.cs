@@ -25,12 +25,7 @@ namespace MarketPlaceExam.Business.Services
             await _repo.AddCategory(categoryEntity);
         }
 
-        public async Task<CategoryModel> GetCategory(int id)
-        {
-            Category categoryEntity = await _repo.GetCategory(id);
-            var model = _mapper.Map<Category, CategoryModel>(categoryEntity);
-            return model;
-        }
+       
         public async Task UpdateCategory(CategoryModel category)
         {
             var categoryEntity = _mapper.Map<CategoryModel, Category>(category);
@@ -45,6 +40,51 @@ namespace MarketPlaceExam.Business.Services
         public bool IsCategoriesEmpty()
         {
             return _repo.IsCategoriesEmpty();
+        }
+
+        public Task DeleteCategoryById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<CategoryModel> GetCategoryById(int id)
+        {
+            Category categoryEntity = await _repo.GetCategory(id);
+            var model = _mapper.Map<Category, CategoryModel>(categoryEntity);
+            return model;
+        }
+
+        public async Task<CategoryModel> GetCategoryByName(string name)
+        {
+            Category categoryEntity = await _repo.GetCategoryByName(name);
+            var model = _mapper.Map<Category, CategoryModel>(categoryEntity);
+            return model;
+        }
+
+        public async Task<IEnumerable<CategoryModel>> GetAllCategories()
+        {
+            var categoryEntity = await _repo.GetCategories();
+            var model = _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryModel>>(categoryEntity);
+            return model;
+        }
+
+        public async Task<bool> Create(string name, string desc)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return false;
+
+            var category = new Category() { Name = name, Description = desc };
+            var result = await _repo.AddCategory(category);
+
+            return result;
+        }
+
+        public async Task Edit(int id, string name, string desc)
+        {
+            Category categoryEntity = await _repo.GetCategory(id);
+            categoryEntity.Name = name;
+            categoryEntity.Description = desc;
+            await _repo.UpdateCategory(categoryEntity);
+
         }
     }
 }

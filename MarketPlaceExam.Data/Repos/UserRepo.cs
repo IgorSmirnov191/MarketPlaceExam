@@ -15,6 +15,7 @@ namespace MarketPlaceExam.Data.Repos
             _context = context;
         }
 
+        
         public async Task AddUser(User user)
         {
             if (user != null)
@@ -29,7 +30,7 @@ namespace MarketPlaceExam.Data.Repos
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<User> GetUser(string id)
         {
             return await _context.Users.FindAsync(id);
         }
@@ -39,11 +40,11 @@ namespace MarketPlaceExam.Data.Repos
             if (user != null)
             {
                 _context.Users.Update(user);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
-        public async Task DeleteUser(int id)
+        public async Task DeleteUser(string id)
         {
             var userlocal = await _context.Users.FindAsync(id);
             if (userlocal != null)
@@ -55,6 +56,13 @@ namespace MarketPlaceExam.Data.Repos
         public bool IsUsersEmpty()
         {
             return _context.Users.Any();
-        } 
+        }
+
+        public async Task<User> GetUserByUsername(string username)
+        {
+            return await _context
+                .Users
+                .SingleOrDefaultAsync(x => x.UserName == username);
+        }
     }
 }

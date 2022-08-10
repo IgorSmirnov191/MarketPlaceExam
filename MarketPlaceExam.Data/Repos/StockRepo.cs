@@ -14,6 +14,7 @@ namespace MarketPlaceExam.Data.Repos
             _context = context;
         }
 
+       
         public async Task AddStock(Stock stock)
         {
             if (stock != null)
@@ -26,7 +27,10 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task<IEnumerable<Stock>> GetStocks()
         {
-            return await _context.Stocks.ToListAsync();
+            return await _context
+                .Stocks
+                .Include(x =>x.Product)
+                .ToListAsync();
         }
 
         public async Task<Stock> GetStock(int id)

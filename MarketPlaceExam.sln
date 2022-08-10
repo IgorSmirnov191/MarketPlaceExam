@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPlaceExam.Data", "Mar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPlace.MVC", "MarketPlace.MVC\MarketPlace.MVC.csproj", "{EB969B47-E144-4C47-BEDB-98E4C4545FBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketPlaceExam.Business.Tests", "MarketPlaceExam.Business.Tests\MarketPlaceExam.Business.Tests.csproj", "{BF2A19F9-F9BA-4EAB-BDA3-F8D8C8659284}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPlaceExam.Business.Tests", "MarketPlaceExam.Business.Tests\MarketPlaceExam.Business.Tests.csproj", "{BF2A19F9-F9BA-4EAB-BDA3-F8D8C8659284}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

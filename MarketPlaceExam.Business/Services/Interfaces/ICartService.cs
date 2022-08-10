@@ -1,4 +1,5 @@
 ﻿using MarketPlaceExam.Business.Model;
+using MarketPlaceExam.Data.Entities;
 
 namespace MarketPlaceExam.Business.Services.Interfaces
 {
@@ -8,6 +9,7 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task DeleteCart(int id);
         Task<CartModel> GetCart(int id);
         Task UpdateCart(CartModel cart);
+        Task<CartModel> GetActiveCart(string userid);
         bool IsCartsEmpty();
     }
 }

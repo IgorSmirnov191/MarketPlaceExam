@@ -15,6 +15,7 @@ namespace MarketPlaceExam.Business.Services
     {
         // Dependencies
         private IOrderRepo _repo;
+       
         private IMapper _mapper;
 
         public OrderService(IOrderRepo repo, IMapper mapper)
@@ -22,9 +23,9 @@ namespace MarketPlaceExam.Business.Services
             _repo = repo;
             _mapper = mapper;
         }
-        public async Task AddOrder(OrderModel category)
+        public async Task AddOrder(OrderModel order)
         {
-            var orderEntity = _mapper.Map<OrderModel, Order>(category);
+            var orderEntity = _mapper.Map<OrderModel, Order>(order);
             await _repo.AddOrder(orderEntity);
         }
 
@@ -44,5 +45,21 @@ namespace MarketPlaceExam.Business.Services
         {
             await _repo.DeleteOrder(id);
         }
+
+       
+        public async Task<IEnumerable<OrderModel>> GetAllOrders()
+        {
+            var orderEntity = await _repo.GetOrders();
+            var model = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderModel>>(orderEntity);
+            return model;
+        }
+
+        public async Task<IEnumerable<OrderModel>> GetMyOrders(string userId)
+        {
+            var orderEntity = await _repo.GetMyOrders(userId);
+            var model = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderModel>>(orderEntity);
+            return model;
+        }
+    
     }
 }

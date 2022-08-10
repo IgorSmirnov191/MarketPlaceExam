@@ -45,5 +45,12 @@ namespace MarketPlaceExam.Business.Services
         {
             return _repo.IsCartsEmpty();
         }
+
+        public async Task<CartModel> GetActiveCart(string userid)
+        {
+            Cart cartEntity = await _repo.GetActiveCart(userid);
+            var model = _mapper.Map<Cart, CartModel>(cartEntity);
+            return model;
+        }
     }
 }

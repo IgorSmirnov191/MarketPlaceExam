@@ -24,7 +24,7 @@ namespace MarketPlaceExam.Business.Services
             await _repo.AddCartItem(cartitemEntity);
         }
 
-        public async Task<CartItemModel> GetCategory(int id)
+        public async Task<CartItemModel> GetCartItem(int id)
         {
             CartItem cartitemEntity = await _repo.GetCartItem(id);
             var model = _mapper.Map<CartItem, CartItemModel>(cartitemEntity);
@@ -42,6 +42,12 @@ namespace MarketPlaceExam.Business.Services
             await _repo.DeleteCartItem(id);
         }
 
+        public async Task<IEnumerable<CartItemModel>> GetAllCartItemsByCart(int cartid)
+        {
+            var cartitemEntity = await _repo.GetAllCartItemsByCart(cartid);
+            var model = _mapper.Map<IEnumerable<CartItem>, IEnumerable<CartItemModel>>(cartitemEntity);
+            return model;
+        }
         public bool IsCartItemsEmpty()
         {
             return _repo.IsCartItemsEmpty();

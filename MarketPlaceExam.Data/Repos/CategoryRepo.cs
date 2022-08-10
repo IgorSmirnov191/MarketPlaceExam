@@ -7,22 +7,23 @@ namespace MarketPlaceExam.Data.Repos
 {
     public class CategoryRepo : ICategoryRepo
     {
-        // TODO: Make Async
-        // TODO: Make Repository for each entity.
-        private ApplicationDbContext _context;
+      
+        public ApplicationDbContext _context;
 
         public CategoryRepo(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task AddCategory(Category category)
+        public async Task<bool> AddCategory(Category category)
         {
+            var result = 0;
             if (category != null)
             {
               await _context.Categories.AddAsync(category);
-               _context.SaveChanges();
+               result = await _context.SaveChangesAsync();
             }
+            return result>0; 
         }
 
         public  async Task<IEnumerable<Category>> GetCategories()
@@ -38,6 +39,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task UpdateCategory(Category category)
         {
+
             if (category != null)
             {
                 _context.Categories.Update(category);
@@ -59,6 +61,33 @@ namespace MarketPlaceExam.Data.Repos
         public bool IsCategoriesEmpty()
         {
             return _context.Categories.Any();
+        }
+
+        public async Task<Category> GetCategoryByName(string name)
+        {
+            return await _context
+                .Categories
+                .SingleOrDefaultAsync(x=>x.Name == name);
+        }
+
+        public async Task Edit(int id, string name, string description)
+        {
+            if (id == 0 || string.IsNullOrWhiteSpace(name))
+            {
+                return;
+            }
+
+            var category = await GetCategory(id);
+            if (category == null)
+            {
+                return;
+            }
+
+            category.Name = name;
+            category.Description = description;
+
+           await UpdateCategory(category);
+          
         }
     }
 }

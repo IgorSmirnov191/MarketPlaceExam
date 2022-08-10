@@ -1,44 +1,56 @@
-﻿using MarketPlace.MVC.Models;
+﻿using AutoMapper;
+using Marketplace.App.Infrastructure;
+using Marketplace.App.ViewModels.Home;
+using MarketPlace.MVC.Models;
 using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace MarketPlace.MVC.Controllers
+namespace Marketplace.App.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-       // private readonly ICategoryService _service;
+        private readonly IMapper _mapper;
+        private readonly ICategoryService _categoryService;
+        private readonly IProductService _productService;
 
-        public HomeController(ILogger<HomeController> logger/*, ICategoryService service*/)
+        public HomeController(IMapper mapper, ICategoryService categoryService, IProductService productService)
         {
-            _logger = logger;
-         //   _service = service;
+            _mapper = mapper;
+            _categoryService = categoryService;
+            _productService = productService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
+            IEnumerable<ProductModel> allProducts = await _productService.GetAllProducts();
+            List<HomeProductViewModel> listProducts = new List<HomeProductViewModel>();
+            foreach (var product in allProducts)
+            {
+                listProducts.Add(new HomeProductViewModel() { Id = product.Id, Name = product.Name, Price = product.Price, PictureUrl = product.Picture.Uri });
+            }
 
-            return View();
+            var resultModel = new HomeIndexViewModel()
+            {
+                Products = listProducts
+            };
+
+            return View(resultModel);
         }
 
-        public async Task<IActionResult> PrivacyAsync()
+        [HttpGet]
+        public IActionResult Search(HomeSearchInputModel inputModel)
         {
-            //CategoryModel dummyModel = new CategoryModel
-            //{
-            //    Name = "One",
-            //    Description = "Two",
-            //};
+            List<HomeProductViewModel> listProducts = new List<HomeProductViewModel>();
+            ViewData["ProductsHead"] = GlobalConstants.HeadTextForFoundResult;
+            if (inputModel.Input == string.Empty && inputModel.CategoryName == GlobalConstants.SearchCategoryDefaultValue)
+            {
+                return Redirect(nameof(Index));
+            }
 
-            // await _service.AddCategory(dummyModel);
-
-            // dummyModel.Id = 1;
-            //  await _service.UpdateCategory(dummyModel);
-            //  await _service.DeleteCategory(1);
-
-
-            return View();
+            return View(new List<HomeSearchViewModel>());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
