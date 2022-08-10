@@ -17,7 +17,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task<bool> AddCategory(Category category)
         {
-            var result = 0;
+            int result = 0;
             if (category != null)
             {
               await _context.Categories.AddAsync(category);
@@ -50,7 +50,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task DeleteCategory(int id)
         {
-            var categorylocal = await _context.Categories.FindAsync(id);
+            Category? categorylocal = await _context.Categories.FindAsync(id);
             if (categorylocal != null)
             {
                 _context.Categories.Remove(categorylocal);
@@ -77,7 +77,7 @@ namespace MarketPlaceExam.Data.Repos
                 return;
             }
 
-            var category = await GetCategory(id);
+            Category category = await GetCategory(id);
             if (category == null)
             {
                 return;

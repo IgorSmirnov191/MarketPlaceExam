@@ -14,6 +14,6 @@
 
         public string PictureUrl { get; set; }
 
-        public decimal Total => this.Quantity * this.Price;
+        public decimal Total => Quantity * Price;
     }
 }

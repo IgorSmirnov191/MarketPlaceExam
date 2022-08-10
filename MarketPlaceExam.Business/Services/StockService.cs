@@ -24,19 +24,19 @@ namespace MarketPlaceExam.Business.Services
         }
         public async Task AddStock(StockModel stock)
         {
-            var stockEntity = _mapper.Map<StockModel, Stock>(stock);
+            Stock stockEntity = _mapper.Map<StockModel, Stock>(stock);
             await _repo.AddStock(stockEntity);
         }
 
         public async Task<StockModel> GetStock(int id)
         {
             Stock stockEntity = await _repo.GetStock(id);
-            var model = _mapper.Map<Stock, StockModel>(stockEntity);
+            StockModel model = _mapper.Map<Stock, StockModel>(stockEntity);
             return model;
         }
         public async Task UpdateStock(StockModel stock)
         {
-            var stockEntity = _mapper.Map<StockModel, Stock>(stock);
+            Stock stockEntity = _mapper.Map<StockModel, Stock>(stock);
             await _repo.UpdateStock(stockEntity);
         }
 

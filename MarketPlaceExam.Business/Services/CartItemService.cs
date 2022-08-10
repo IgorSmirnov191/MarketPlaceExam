@@ -20,20 +20,20 @@ namespace MarketPlaceExam.Business.Services
 
         public async Task AddCartItem(CartItemModel cartitem)
         {
-            var cartitemEntity = _mapper.Map<CartItemModel, CartItem>(cartitem);
+            CartItem cartitemEntity = _mapper.Map<CartItemModel, CartItem>(cartitem);
             await _repo.AddCartItem(cartitemEntity);
         }
 
         public async Task<CartItemModel> GetCartItem(int id)
         {
             CartItem cartitemEntity = await _repo.GetCartItem(id);
-            var model = _mapper.Map<CartItem, CartItemModel>(cartitemEntity);
+            CartItemModel model = _mapper.Map<CartItem, CartItemModel>(cartitemEntity);
             return model;
         }
 
         public async Task UpdateCartItem(CartItemModel cartitem)
         {
-            var cartitemEntity = _mapper.Map<CartItemModel, CartItem>(cartitem);
+            CartItem cartitemEntity = _mapper.Map<CartItemModel, CartItem>(cartitem);
             await _repo.UpdateCartItem(cartitemEntity);
         }
 
@@ -44,8 +44,8 @@ namespace MarketPlaceExam.Business.Services
 
         public async Task<IEnumerable<CartItemModel>> GetAllCartItemsByCart(int cartid)
         {
-            var cartitemEntity = await _repo.GetAllCartItemsByCart(cartid);
-            var model = _mapper.Map<IEnumerable<CartItem>, IEnumerable<CartItemModel>>(cartitemEntity);
+            IEnumerable<CartItem> cartitemEntity = await _repo.GetAllCartItemsByCart(cartid);
+            IEnumerable<CartItemModel> model = _mapper.Map<IEnumerable<CartItem>, IEnumerable<CartItemModel>>(cartitemEntity);
             return model;
         }
         public bool IsCartItemsEmpty()

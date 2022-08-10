@@ -2,20 +2,18 @@
 using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Data.Entities;
 
-
 namespace MarketPlaceExam.Business.Configuration
 {
-    public class BusinessMapperProfile: Profile
+    public class BusinessMapperProfile : Profile
     {
         public BusinessMapperProfile()
-        { 
+        {
             CreateMap<CartItemModel, CartItem>().ReverseMap();
 
             CreateMap<CartModel, Cart>().ReverseMap();
 
             //Category
             CreateMap<CategoryModel, Category>().ReverseMap();
-           
 
             CreateMap<OrderModel, Order>().ReverseMap();
 
@@ -34,10 +32,6 @@ namespace MarketPlaceExam.Business.Configuration
             CreateMap<SupplierModel, Supplier>().ReverseMap();
 
             CreateMap<UserModel, User>().ReverseMap();
-
-
-
-
         }
     }
 }

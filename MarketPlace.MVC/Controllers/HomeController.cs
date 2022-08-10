@@ -27,12 +27,12 @@ namespace Marketplace.App.Controllers
         {
             IEnumerable<ProductModel> allProducts = await _productService.GetAllProducts();
             List<HomeProductViewModel> listProducts = new List<HomeProductViewModel>();
-            foreach (var product in allProducts)
+            foreach (ProductModel product in allProducts)
             {
                 listProducts.Add(new HomeProductViewModel() { Id = product.Id, Name = product.Name, Price = product.Price, PictureUrl = product.Picture.Uri });
             }
 
-            var resultModel = new HomeIndexViewModel()
+            HomeIndexViewModel resultModel = new HomeIndexViewModel()
             {
                 Products = listProducts
             };

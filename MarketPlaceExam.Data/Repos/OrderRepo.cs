@@ -65,7 +65,7 @@ namespace MarketPlaceExam.Data.Repos
         }
         public async Task DeleteOrder(int id)
         {
-            var orderitemlocal = await _context.Orders.FindAsync(id);
+            Order? orderitemlocal = await _context.Orders.FindAsync(id);
             if (orderitemlocal != null)
             {
                 _context.Orders.Remove(orderitemlocal);

@@ -1,5 +1,4 @@
 ﻿using Marketplace.App.ViewModels.Components;
-using Marketplace.App.ViewModels.ShoppingCart;
 using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Business.Services.Interfaces;
 using MarketPlaceExam.Data.Entities;
@@ -14,7 +13,6 @@ namespace Marketplace.App.Components
         private readonly ICategoryService _categoryService;
         private readonly ICartItemService _cartitemService;
         private readonly ICartService _cartService;
-       
 
         public MainHeaderViewComponent(UserManager<User> userManager, ICategoryService categoryService, ICartItemService cartitemService, ICartService cartService)
         {
@@ -26,44 +24,44 @@ namespace Marketplace.App.Components
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var allCategories = await _categoryService.GetAllCategories();
+            // Mapping
+            IEnumerable<CategoryModel> allCategories = await _categoryService.GetAllCategories();
             List<IndexCategoryViewModel> listCategories = new List<IndexCategoryViewModel>();
-            foreach (var category in allCategories)
+
+            foreach (CategoryModel category in allCategories)
             {
-                listCategories.Add(new IndexCategoryViewModel() { Id = category.Id, Name = category.Name }); 
+                listCategories.Add(new IndexCategoryViewModel() { Id = category.Id, Name = category.Name });
             }
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+
             if (user != null)
             {
-                var cart = await _cartService.GetActiveCart(user.Id);
-                var cartitems = await _cartitemService.GetAllCartItemsByCart((int) cart.Id);
+                CartModel cart = await _cartService.GetActiveCart(user.Id);
+                IEnumerable<CartItemModel> cartitems = await _cartitemService.GetAllCartItemsByCart(cart.Id);
                 decimal itemsTotal = 0.0m;
-                foreach (var cartitem in cartitems)
+
+                foreach (CartItemModel cartitem in cartitems)
                 {
-                    itemsTotal+= cartitem.Product.Price*cartitem.Quantity;
+                    itemsTotal += cartitem.Product.Price * cartitem.Quantity;
                 }
 
-                var resultModel = new MainHeaderViewModel()
+                MainHeaderViewModel resultModel = new MainHeaderViewModel()
                 {
                     ListCategories = listCategories,
                     ShoppingCartProductCount = cartitems.Count(),
                     ShoppingCartTotalPrice = itemsTotal
-
                 };
-                    
-                   
-                     
 
-                return this.View(resultModel);
+                return View(resultModel);
             }
 
-            var resultModelIfNull = new MainHeaderViewModel()
+            MainHeaderViewModel resultModelIfNull = new MainHeaderViewModel()
             {
                 ListCategories = listCategories,
                 ShoppingCartProductCount = 0,
                 ShoppingCartTotalPrice = 0.00M
             };
-
 
             return View(resultModelIfNull);
         }

@@ -28,19 +28,19 @@ namespace MarketPlaceExam.Business.Services
         }
         public async Task AddUser(UserModel user)
         {
-            var userEntity = _mapper.Map<UserModel, User>(user);
+            User userEntity = _mapper.Map<UserModel, User>(user);
             await _repo.AddUser(userEntity);
         }
 
         public async Task<UserModel> GetUser(string id)
         {
             User userEntity = await _repo.GetUser(id);
-            var model = _mapper.Map<User, UserModel>(userEntity);
+            UserModel model = _mapper.Map<User, UserModel>(userEntity);
             return model;
         }
         public async Task UpdateUser(UserModel user)
         {
-            var userEntity = _mapper.Map<UserModel, User>(user);
+            User userEntity = _mapper.Map<UserModel, User>(user);
             await _repo.UpdateUser(userEntity);
         }
 
@@ -56,18 +56,18 @@ namespace MarketPlaceExam.Business.Services
 
         public async Task<IEnumerable<UserModel>> GetAllUsers()
         {
-            var userEntity = await _repo.GetUsers();
-            var model = _mapper.Map<IEnumerable<User>, IEnumerable<UserModel>>(userEntity);
+            IEnumerable<User> userEntity = await _repo.GetUsers();
+            IEnumerable<UserModel> model = _mapper.Map<IEnumerable<User>, IEnumerable<UserModel>>(userEntity);
             return model;
         }
 
         public async Task<IEnumerable<string>> GetUserRoles(string id)
         {
-            var user = await _repo.GetUser(id);
+            User user = await _repo.GetUser(id);
 
             if (user == null) return new List<string>();
 
-            var userInRoles = await _userManager
+            IList<string> userInRoles = await _userManager
                 .GetRolesAsync(user);
 
             return userInRoles;
@@ -82,7 +82,7 @@ namespace MarketPlaceExam.Business.Services
         {
 
             User userEntity = await _repo.GetUserByUsername(username);
-            var model = _mapper.Map<User, UserModel>(userEntity);
+            UserModel model = _mapper.Map<User, UserModel>(userEntity);
             return model;
 
         }

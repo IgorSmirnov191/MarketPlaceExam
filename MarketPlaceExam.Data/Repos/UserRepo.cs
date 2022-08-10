@@ -46,7 +46,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task DeleteUser(string id)
         {
-            var userlocal = await _context.Users.FindAsync(id);
+            User? userlocal = await _context.Users.FindAsync(id);
             if (userlocal != null)
             {
                 _context.Users.Remove(userlocal);

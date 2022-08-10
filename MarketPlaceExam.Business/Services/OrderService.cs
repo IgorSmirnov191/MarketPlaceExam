@@ -25,19 +25,19 @@ namespace MarketPlaceExam.Business.Services
         }
         public async Task AddOrder(OrderModel order)
         {
-            var orderEntity = _mapper.Map<OrderModel, Order>(order);
+            Order orderEntity = _mapper.Map<OrderModel, Order>(order);
             await _repo.AddOrder(orderEntity);
         }
 
         public async Task<OrderModel> GetOrder(int id)
         {
             Order orderEntity = await _repo.GetOrder(id);
-            var model = _mapper.Map<Order, OrderModel>(orderEntity);
+            OrderModel model = _mapper.Map<Order, OrderModel>(orderEntity);
             return model;
         }
         public async Task UpdateOrder(OrderModel order)
         {
-            var orderEntity = _mapper.Map<OrderModel, Order>(order);
+            Order orderEntity = _mapper.Map<OrderModel, Order>(order);
             await _repo.UpdateOrder(orderEntity);
         }
 
@@ -49,15 +49,15 @@ namespace MarketPlaceExam.Business.Services
        
         public async Task<IEnumerable<OrderModel>> GetAllOrders()
         {
-            var orderEntity = await _repo.GetOrders();
-            var model = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderModel>>(orderEntity);
+            IEnumerable<Order> orderEntity = await _repo.GetOrders();
+            IEnumerable<OrderModel> model = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderModel>>(orderEntity);
             return model;
         }
 
         public async Task<IEnumerable<OrderModel>> GetMyOrders(string userId)
         {
-            var orderEntity = await _repo.GetMyOrders(userId);
-            var model = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderModel>>(orderEntity);
+            IEnumerable<Order> orderEntity = await _repo.GetMyOrders(userId);
+            IEnumerable<OrderModel> model = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderModel>>(orderEntity);
             return model;
         }
     

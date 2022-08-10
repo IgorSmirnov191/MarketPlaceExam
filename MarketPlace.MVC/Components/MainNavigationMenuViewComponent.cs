@@ -17,14 +17,14 @@ namespace Marketplace.App.Components
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var allCategories = await _categoryService.GetAllCategories();
+            IEnumerable<MarketPlaceExam.Business.Model.CategoryModel> allCategories = await _categoryService.GetAllCategories();
             List<IndexCategoryViewModel> listCategories = new List<IndexCategoryViewModel>();
-            foreach (var category in allCategories)
+            foreach (MarketPlaceExam.Business.Model.CategoryModel category in allCategories)
             {
                 listCategories.Add(new IndexCategoryViewModel() { Id = category.Id, Name = category.Name });
             }
-           
-            var resultModel = new MainNavigationMenuViewModel()
+
+            MainNavigationMenuViewModel resultModel = new MainNavigationMenuViewModel()
             {
                 Categories = listCategories
             };

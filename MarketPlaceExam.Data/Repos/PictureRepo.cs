@@ -45,7 +45,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task DeletePicture(int id)
         {
-            var piclocal = await _context.Pictures.FindAsync(id);
+            Picture? piclocal = await _context.Pictures.FindAsync(id);
             if (piclocal != null)
             {
                 _context.Pictures.Remove(piclocal);

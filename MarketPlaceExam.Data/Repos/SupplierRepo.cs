@@ -46,7 +46,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task DeleteSupplier(int id)
         {
-            var supplierlocal = await _context.Suppliers.FindAsync(id);
+            Supplier? supplierlocal = await _context.Suppliers.FindAsync(id);
             if (supplierlocal != null)
             {
                 _context.Suppliers.Remove(supplierlocal);

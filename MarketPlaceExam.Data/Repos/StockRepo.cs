@@ -49,7 +49,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task DeleteStock(int id)
         {
-            var stocklocal = await _context.Stocks.FindAsync(id);
+            Stock? stocklocal = await _context.Stocks.FindAsync(id);
             if (stocklocal != null)
             {
                 _context.Stocks.Remove(stocklocal);

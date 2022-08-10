@@ -51,7 +51,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task DeletePayment(int id)
         {
-            var paymentlocal = await _context.Payments.FindAsync(id);
+            Payment? paymentlocal = await _context.Payments.FindAsync(id);
             if (paymentlocal != null)
             {
                 _context.Payments.Remove(paymentlocal);

@@ -24,19 +24,19 @@ namespace MarketPlaceExam.Business.Services
         }
         public async Task AddSupplier(SupplierModel supplier)
         {
-            var supplierEntity = _mapper.Map<SupplierModel, Supplier>(supplier);
+            Supplier supplierEntity = _mapper.Map<SupplierModel, Supplier>(supplier);
             await _repo.AddSupplier(supplierEntity);
         }
 
         public async Task<SupplierModel> GetSupplier(int id)
         {
             Supplier supplierEntity = await _repo.GetSupplier(id);
-            var model = _mapper.Map<Supplier, SupplierModel>(supplierEntity);
+            SupplierModel model = _mapper.Map<Supplier, SupplierModel>(supplierEntity);
             return model;
         }
         public async Task UpdateSupplier(SupplierModel category)
         {
-            var supplierEntity = _mapper.Map<SupplierModel, Supplier>(category);
+            Supplier supplierEntity = _mapper.Map<SupplierModel, Supplier>(category);
             await _repo.UpdateSupplier(supplierEntity);
         }
 

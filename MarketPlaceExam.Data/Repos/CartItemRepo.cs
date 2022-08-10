@@ -51,7 +51,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task DeleteCartItem(int id)
         {
-            var cartitemlocal = await _context.CartItems.FindAsync(id);
+            CartItem? cartitemlocal = await _context.CartItems.FindAsync(id);
             if (cartitemlocal != null)
             {
                 _context.CartItems.Remove(cartitemlocal);

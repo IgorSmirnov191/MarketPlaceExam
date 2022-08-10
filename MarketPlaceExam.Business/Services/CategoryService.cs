@@ -20,15 +20,15 @@ namespace MarketPlaceExam.Business.Services
 
         public async Task AddCategory(CategoryModel category)
         {
-          
-            var categoryEntity = _mapper.Map<CategoryModel, Category>(category);
+
+            Category categoryEntity = _mapper.Map<CategoryModel, Category>(category);
             await _repo.AddCategory(categoryEntity);
         }
 
        
         public async Task UpdateCategory(CategoryModel category)
         {
-            var categoryEntity = _mapper.Map<CategoryModel, Category>(category);
+            Category categoryEntity = _mapper.Map<CategoryModel, Category>(category);
             await _repo.UpdateCategory(categoryEntity);
         }
 
@@ -50,21 +50,21 @@ namespace MarketPlaceExam.Business.Services
         public async Task<CategoryModel> GetCategoryById(int id)
         {
             Category categoryEntity = await _repo.GetCategory(id);
-            var model = _mapper.Map<Category, CategoryModel>(categoryEntity);
+            CategoryModel model = _mapper.Map<Category, CategoryModel>(categoryEntity);
             return model;
         }
 
         public async Task<CategoryModel> GetCategoryByName(string name)
         {
             Category categoryEntity = await _repo.GetCategoryByName(name);
-            var model = _mapper.Map<Category, CategoryModel>(categoryEntity);
+            CategoryModel model = _mapper.Map<Category, CategoryModel>(categoryEntity);
             return model;
         }
 
         public async Task<IEnumerable<CategoryModel>> GetAllCategories()
         {
-            var categoryEntity = await _repo.GetCategories();
-            var model = _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryModel>>(categoryEntity);
+            IEnumerable<Category> categoryEntity = await _repo.GetCategories();
+            IEnumerable<CategoryModel> model = _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryModel>>(categoryEntity);
             return model;
         }
 
@@ -72,8 +72,8 @@ namespace MarketPlaceExam.Business.Services
         {
             if (string.IsNullOrWhiteSpace(name)) return false;
 
-            var category = new Category() { Name = name, Description = desc };
-            var result = await _repo.AddCategory(category);
+            Category category = new Category() { Name = name, Description = desc };
+            bool result = await _repo.AddCategory(category);
 
             return result;
         }

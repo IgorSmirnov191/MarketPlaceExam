@@ -9,6 +9,6 @@ namespace Marketplace.App.ViewModels.ShoppingCart
     {
         public List<ShoppingCartViewModel> Products { get; set; }
 
-        public decimal TotalProductsCost => this.Products.Select(x => x.Total).Sum();
+        public decimal TotalProductsCost => Products.Select(x => x.Total).Sum();
     }
 }

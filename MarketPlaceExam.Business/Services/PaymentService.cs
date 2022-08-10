@@ -23,19 +23,19 @@ namespace MarketPlaceExam.Business.Services
         }
         public async Task AddPayment(PaymentModel payment)
         {
-            var paymentEntity = _mapper.Map<PaymentModel, Payment>(payment);
+            Payment paymentEntity = _mapper.Map<PaymentModel, Payment>(payment);
             await _repo.AddPayment(paymentEntity);
         }
 
         public async Task<PaymentModel> GetPayment(int id)
         {
             Payment paymentEntity = await _repo.GetPayment(id);
-            var model = _mapper.Map<Payment, PaymentModel>(paymentEntity);
+            PaymentModel model = _mapper.Map<Payment, PaymentModel>(paymentEntity);
             return model;
         }
         public async Task UpdatePayment(PaymentModel payment)
         {
-            var paymentEntity = _mapper.Map<PaymentModel, Payment>(payment);
+            Payment paymentEntity = _mapper.Map<PaymentModel, Payment>(payment);
             await _repo.UpdatePayment(paymentEntity);
         }
 

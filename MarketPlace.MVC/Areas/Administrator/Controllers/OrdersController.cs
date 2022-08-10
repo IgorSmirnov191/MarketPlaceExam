@@ -18,10 +18,10 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         [HttpGet]
         public IActionResult Orders()
         {
-            var result = this.orderService.GetAllOrders();
+            Task<IEnumerable<MarketPlaceExam.Business.Model.OrderModel>> result = orderService.GetAllOrders();
                   
 
-            return this.View(result);
+            return View(result);
         }
 
         [HttpGet]
@@ -29,7 +29,7 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         {
             //to do:
 
-            return this.RedirectToAction(nameof(Orders));
+            return RedirectToAction(nameof(Orders));
         }
     }
 }

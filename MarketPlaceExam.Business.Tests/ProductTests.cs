@@ -18,7 +18,7 @@ namespace MarketPlaceExam.Business.Tests
         public void Setup()
         {
             repoMock = new Mock<IProductRepo>();
-            var mockEntity = new Product()
+            Product mockEntity = new Product()
             {
                 Id = 1,
                 Name = "I am a mock product",
@@ -28,7 +28,7 @@ namespace MarketPlaceExam.Business.Tests
             repoMock.Setup(x => x.GetProduct(It.IsAny<int>()))
                 .ReturnsAsync(mockEntity);
 
-            var mockMapper = new MapperConfiguration(cfg =>
+            MapperConfiguration mockMapper = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<BusinessMapperProfile>();
             });

@@ -20,19 +20,19 @@ namespace MarketPlaceExam.Business.Services
 
         public async Task AddCart(CartModel cart)
         {
-            var cartEntity = _mapper.Map<CartModel, Cart>(cart);
+            Cart cartEntity = _mapper.Map<CartModel, Cart>(cart);
             await _repo.AddCart(cartEntity);
         }
 
         public async Task<CartModel> GetCart(int id)
         {
             Cart cartEntity = await _repo.GetCart(id);
-            var model = _mapper.Map<Cart, CartModel>(cartEntity);
+            CartModel model = _mapper.Map<Cart, CartModel>(cartEntity);
             return model;
         }
         public async Task UpdateCart(CartModel cart)
         {
-            var cartEntity = _mapper.Map<CartModel, Cart>(cart);
+            Cart cartEntity = _mapper.Map<CartModel, Cart>(cart);
             await _repo.UpdateCart(cartEntity);
         }
 
@@ -49,7 +49,7 @@ namespace MarketPlaceExam.Business.Services
         public async Task<CartModel> GetActiveCart(string userid)
         {
             Cart cartEntity = await _repo.GetActiveCart(userid);
-            var model = _mapper.Map<Cart, CartModel>(cartEntity);
+            CartModel model = _mapper.Map<Cart, CartModel>(cartEntity);
             return model;
         }
     }

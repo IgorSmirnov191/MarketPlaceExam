@@ -6,7 +6,7 @@ namespace Marketplace.App.Areas.Administrator.Controllers
     {
         public IActionResult Index()
         {
-            return this.View();
+            return View();
         }
     }
 }

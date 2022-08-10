@@ -47,7 +47,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task DeleteShipper(int id)
         {
-            var shipperlocal = await _context.Shippers.FindAsync(id);
+            Shipper? shipperlocal = await _context.Shippers.FindAsync(id);
             if (shipperlocal != null)
             {
                 _context.Shippers.Remove(shipperlocal);

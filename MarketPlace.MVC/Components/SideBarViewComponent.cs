@@ -16,15 +16,15 @@ namespace Marketplace.App.Components
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var allCategories = await _categoryService.GetAllCategories();
+            IEnumerable<MarketPlaceExam.Business.Model.CategoryModel> allCategories = await _categoryService.GetAllCategories();
             List<SideBarCategoryViewModel> listCategories = new List<SideBarCategoryViewModel>();
-            foreach (var category in allCategories)
+            foreach (MarketPlaceExam.Business.Model.CategoryModel category in allCategories)
             {
                 listCategories.Add(new SideBarCategoryViewModel() { Id = category.Id, Name = category.Name });
             }
-            var resultModel = new SideBarViewModel() { Categories = listCategories };
+            SideBarViewModel resultModel = new SideBarViewModel() { Categories = listCategories };
 
-            return this.View(resultModel);
+            return View(resultModel);
         }
     }
 }

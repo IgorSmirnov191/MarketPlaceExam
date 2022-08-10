@@ -50,7 +50,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task DeleteShipment(int id)
         {
-            var shipmentlocal = await _context.Shipments.FindAsync(id);
+            Shipment? shipmentlocal = await _context.Shipments.FindAsync(id);
             if (shipmentlocal != null)
             {
                 _context.Shipments.Remove(shipmentlocal);

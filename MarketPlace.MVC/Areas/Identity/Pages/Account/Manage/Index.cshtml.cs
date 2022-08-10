@@ -105,18 +105,18 @@ namespace MarketPlace.MVC.Areas.Identity.Pages.Account.Manage
 
         private async Task LoadAsync(User user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            var firstName = user.FirstName;
-            var lastName = user.LastName;
-            var address = user.Address;
-            var city = user.City;
-            var zipcode = user.ZipCode;
-            var shipAddress = user.ShipAddress;
-            var shipCity = user.ShipCity;
-            var shipZipCode = user.ShipZipCode;
-            var shipPhoneNumber = user.ShipPhoneNumber;
-            var shipEmail = user.ShipEmail;
+            string userName = await _userManager.GetUserNameAsync(user);
+            string phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            string firstName = user.FirstName;
+            string lastName = user.LastName;
+            string address = user.Address;
+            string city = user.City;
+            string zipcode = user.ZipCode;
+            string shipAddress = user.ShipAddress;
+            string shipCity = user.ShipCity;
+            string shipZipCode = user.ShipZipCode;
+            string shipPhoneNumber = user.ShipPhoneNumber;
+            string shipEmail = user.ShipEmail;
             Username = userName;
 
             Input = new InputModel
@@ -139,7 +139,7 @@ namespace MarketPlace.MVC.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            User user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -151,7 +151,7 @@ namespace MarketPlace.MVC.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            User user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -163,26 +163,26 @@ namespace MarketPlace.MVC.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            string phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+                IdentityResult setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
             }
-            var firstName = user.FirstName;
-            var lastName = user.LastName;
-            var address = user.Address;
-            var city = user.City;
-            var zipcode = user.ZipCode;
-            var shipAddress = user.ShipAddress;
-            var shipCity = user.ShipCity;
-            var shipZipCode = user.ShipZipCode;
-            var shipPhoneNumber = user.ShipPhoneNumber;
-            var shipEmail = user.ShipEmail;
+            string firstName = user.FirstName;
+            string lastName = user.LastName;
+            string address = user.Address;
+            string city = user.City;
+            string zipcode = user.ZipCode;
+            string shipAddress = user.ShipAddress;
+            string shipCity = user.ShipCity;
+            string shipZipCode = user.ShipZipCode;
+            string shipPhoneNumber = user.ShipPhoneNumber;
+            string shipEmail = user.ShipEmail;
             if (Input.FirstName != firstName)
             {
 
@@ -243,14 +243,14 @@ namespace MarketPlace.MVC.Areas.Identity.Pages.Account.Manage
             }
             if (Input.Username != user.UserName)
             {
-                var userNameExists = await _userManager.FindByNameAsync(Input.Username);
+                User userNameExists = await _userManager.FindByNameAsync(Input.Username);
                 if (userNameExists != null)
                 {
                     StatusMessage = "User name already taken. Select a different username.";
                     return RedirectToPage();
                 }
 
-                var setUserName = await _userManager.SetUserNameAsync(user, Input.Username);
+                IdentityResult setUserName = await _userManager.SetUserNameAsync(user, Input.Username);
                 if (!setUserName.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set user name.";

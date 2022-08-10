@@ -49,7 +49,7 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task DeleteCart(int id)
         {
-            var cartlocal = await _context.Carts.FindAsync(id);
+            Cart? cartlocal = await _context.Carts.FindAsync(id);
             if (cartlocal != null)
             {
                 _context.Carts.Remove(cartlocal);

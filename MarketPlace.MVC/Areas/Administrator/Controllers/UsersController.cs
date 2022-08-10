@@ -16,14 +16,14 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         public UsersController(IMapper mapper, IUserService usersService, UserManager<User> userManager)
         {
             this.mapper = mapper;
-            this.userService = usersService;
+            userService = usersService;
             this.userManager = userManager;
         }
 
         [HttpGet]
         public IActionResult All()
         {
-            var users = this.userService.GetAllUsers();
+            Task<IEnumerable<MarketPlaceExam.Business.Model.UserModel>> users = userService.GetAllUsers();
 
             return View(users);
         }
@@ -31,13 +31,13 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            var user = await this.userService.GetUser(id);
+            MarketPlaceExam.Business.Model.UserModel user = await userService.GetUser(id);
             if(user == null)
             {
-                return this.RedirectToAction(nameof(All));
+                return RedirectToAction(nameof(All));
             }
 
-            var userModel = this.mapper.Map<DeleteUserViewModel>(user);
+            DeleteUserViewModel userModel = mapper.Map<DeleteUserViewModel>(user);
             
             return View(userModel);
         }
@@ -45,7 +45,7 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         [HttpGet]
         public async Task<IActionResult> Destroy(string id)
         {
-            await this.userService.DeleteUser(id);
+            await userService.DeleteUser(id);
 
             return  RedirectToAction(nameof(All));
         }
@@ -53,30 +53,30 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         [HttpGet]
         public IActionResult Roles(string id)
         {
-            var userRoles = this.userService.GetUserRoles(id)
+            List<string> userRoles = userService.GetUserRoles(id)
                 .GetAwaiter()
                 .GetResult()
                 .ToList();
 
-            var userRolesModel = new RolesViewModel()
+            RolesViewModel userRolesModel = new RolesViewModel()
             {
                 Id = id,
                 Roles = userRoles
             };
 
-            return this.View(userRolesModel);
+            return View(userRolesModel);
         }
 
         [HttpGet]
         public async Task<IActionResult> ChangePassword(string id)
         {
-            var user = await this.userService.GetUser(id);
+            MarketPlaceExam.Business.Model.UserModel user = await userService.GetUser(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            var modelResult = this.mapper.Map<AdminChangePasswordInputModel>(user);
+            AdminChangePasswordInputModel modelResult = mapper.Map<AdminChangePasswordInputModel>(user);
 
             return View(modelResult);
         }
@@ -87,17 +87,17 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
-            var result = await this.userService.ChangePassword(id, inputModel.Password);
+            IdentityResult result = await userService.ChangePassword(id, inputModel.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction(nameof(All));
             }
             else
             {
-                foreach (var error in result.Errors)
+                foreach (IdentityError? error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }

@@ -27,17 +27,17 @@ namespace Marketplace.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            User user = await _userManager.GetUserAsync(HttpContext.User);
             if (user != null)
             {
-                var isCartAny = await _cartService.GetActiveCart(user.Id);
+                MarketPlaceExam.Business.Model.CartModel isCartAny = await _cartService.GetActiveCart(user.Id);
                 if (isCartAny != null)
                 {
-                    return this.Redirect("/ShoppingCart/Cart");
+                    return Redirect("/ShoppingCart/Cart");
                 }
             }
 
-            return this.View();
+            return View();
         } 
 
         
@@ -46,17 +46,17 @@ namespace Marketplace.App.Controllers
         [HttpGet]
         public IActionResult SuccessfulOrder()
         {
-            return this.View();
+            return View();
         }
 
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> MyOrders()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            var resultModel = _orderService.GetMyOrders(user.Id); 
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            Task<IEnumerable<MarketPlaceExam.Business.Model.OrderModel>> resultModel = _orderService.GetMyOrders(user.Id); 
 
-            return this.View(resultModel);
+            return View(resultModel);
         }
     }
 }

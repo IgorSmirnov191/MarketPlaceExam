@@ -20,7 +20,7 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         [HttpGet]
         public IActionResult All()
         {
-            var resultModel = this.categoryService.GetAllCategories();
+            Task<IEnumerable<CategoryModel>> resultModel = categoryService.GetAllCategories();
 
             return View(resultModel);
         }
@@ -37,13 +37,13 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
-            var result = await this.categoryService.Create(inputModel.Name,inputModel.Description);
+            bool result = await categoryService.Create(inputModel.Name,inputModel.Description);
             if (!result)
             {
-                return this.Redirect("/");
+                return Redirect("/");
             }
 
             return RedirectToAction(nameof(All));
@@ -52,14 +52,14 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var category = await this.categoryService.GetCategoryById(id);
+            CategoryModel category = await categoryService.GetCategoryById(id);
             if (category == null)
             {
-                return this.RedirectToAction(nameof(All));
+                return RedirectToAction(nameof(All));
             }
-            var resultModel = this.mapper.Map<EditCategoryInputModel>(category);
+            EditCategoryInputModel resultModel = mapper.Map<EditCategoryInputModel>(category);
 
-            return this.View(resultModel);
+            return View(resultModel);
         }
 
         [HttpPost]
@@ -68,10 +68,10 @@ namespace Marketplace.App.Areas.Administrator.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
-            await this.categoryService.Edit(id, inputModel.Name, inputModel.Description);
+            await categoryService.Edit(id, inputModel.Name, inputModel.Description);
 
             return RedirectToAction(nameof(All));
         }
