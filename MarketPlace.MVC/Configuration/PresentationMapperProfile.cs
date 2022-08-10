@@ -17,8 +17,7 @@ namespace MarketPlace.MVC.Configuration
             CreateMap<Category, EditCategoryInputModel>().ReverseMap();
             CreateMap<Category, ProductCategoryViewModel>().ReverseMap();
             CreateMap<Category, HomeCategoryViewModel>().ReverseMap();
-            CreateMap<Category, IndexCategoryViewModel>()
-                .ForMember(icvm => icvm.Id, x => x.MapFrom(c => c.Id));
+
             CreateMap<Category, SideBarCategoryViewModel>()
                 .ForMember(sbcvm => sbcvm.Id, x => x.MapFrom(c => c.Id));
         }

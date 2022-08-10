@@ -1,10 +1,4 @@
 ﻿using MarketPlaceExam.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MarketPlaceExam.Business.Model
 {
@@ -16,7 +10,22 @@ namespace MarketPlaceExam.Business.Model
         public User? User { get; set; }
         public int? PaymentId { get; set; }
         public Payment? Payment { get; set; }
+        public IList<CartItemModel> CartItems { get; set; } = new List<CartItemModel>();
 
+        public decimal TotalPrice
+        {
+            get
+            {
+                return CartItems.Sum(x => x.Quantity * x.Product.Price);
+            }
+        }
 
+        public int TotalAmountOfItemsInCart
+        {
+            get
+            {
+                return CartItems.Sum(x => x.Quantity);
+            }
+        }
     }
 }

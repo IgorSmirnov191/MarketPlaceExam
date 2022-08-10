@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MarketPlaceExam.Data.Entities
 {
@@ -11,16 +6,16 @@ namespace MarketPlaceExam.Data.Entities
     {
         [Key]
         public int Id { get; set; }
+
         [MaxLength(250)]
         public string? Description { get; set; }
+
         public string? UserId { get; set; }
         public User? User { get; set; }
         public int? PaymentId { get; set; }
         public Payment? Payment { get; set; }
 
-
-
-        //todo data annotation
+        public IList<CartItem> CartItems { get; set; } = new List<CartItem>();
 
         public override string ToString()
         {

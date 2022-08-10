@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using MarketPlaceExam.Data.Entities;
 using MarketPlaceExam.Business.Model;
-using MarketPlaceExam.Data.Repos.Interfaces;
 using MarketPlaceExam.Business.Services.Interfaces;
+using MarketPlaceExam.Data.Entities;
+using MarketPlaceExam.Data.Repos.Interfaces;
 
 namespace MarketPlaceExam.Business.Services
 {
@@ -30,6 +30,7 @@ namespace MarketPlaceExam.Business.Services
             CartModel model = _mapper.Map<Cart, CartModel>(cartEntity);
             return model;
         }
+
         public async Task UpdateCart(CartModel cart)
         {
             Cart cartEntity = _mapper.Map<CartModel, Cart>(cart);
@@ -51,6 +52,37 @@ namespace MarketPlaceExam.Business.Services
             Cart cartEntity = await _repo.GetActiveCart(userid);
             CartModel model = _mapper.Map<Cart, CartModel>(cartEntity);
             return model;
+        }
+
+        public async Task<ShoppingCartModel> GetMainHeaderData(User user)
+        {
+            ShoppingCartModel result;
+
+            if (user == null)
+            {
+                result = new ShoppingCartModel()
+                {
+                    ShoppingCartProductCount = 0,
+                    ShoppingCartTotalPrice = 0.00M
+                };
+            }
+            else
+            {
+                result = await GetItemsInUserCart(user.Id);
+            }
+
+            return result;
+        }
+
+        private async Task<ShoppingCartModel> GetItemsInUserCart(string userId)
+        {
+            CartModel cart = await GetActiveCart(userId);
+
+            return new ShoppingCartModel()
+            {
+                ShoppingCartProductCount = cart.TotalAmountOfItemsInCart,
+                ShoppingCartTotalPrice = cart.TotalPrice,
+            };
         }
     }
 }

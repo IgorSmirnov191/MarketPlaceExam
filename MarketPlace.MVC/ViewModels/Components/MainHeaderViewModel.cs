@@ -1,12 +1,10 @@
-﻿using Marketplace.App.ViewModels.ShoppingCart;
-using MarketPlaceExam.Business.Model;
-using System.Collections.Generic;
+﻿using MarketPlaceExam.Business.Model;
 
 namespace Marketplace.App.ViewModels.Components
 {
     public class MainHeaderViewModel
     {
-        public List<IndexCategoryViewModel> ListCategories { get; set; }
+        public IEnumerable<CategoryModel> ListCategories { get; set; } = new List<CategoryModel>();
 
         public int ShoppingCartProductCount { get; set; }
 

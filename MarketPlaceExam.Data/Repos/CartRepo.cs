@@ -13,13 +13,13 @@ namespace MarketPlaceExam.Data.Repos
         {
             _context = context;
         }
-       
+
         public async Task AddCart(Cart cart)
         {
-            if(cart != null)
+            if (cart != null)
             {
-                 await _context.Carts.AddAsync(cart);
-                _context.SaveChanges();
+                await _context.Carts.AddAsync(cart);
+                await _context.SaveChangesAsync();
             }
         }
 
@@ -32,7 +32,7 @@ namespace MarketPlaceExam.Data.Repos
                 .ToListAsync();
         }
 
-        public async Task <Cart> GetCart(int id)
+        public async Task<Cart> GetCart(int id)
         {
             return await _context.Carts.FindAsync(id);
 
@@ -43,7 +43,7 @@ namespace MarketPlaceExam.Data.Repos
             if (cart != null)
             {
                 _context.Carts.Update(cart);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
@@ -53,7 +53,7 @@ namespace MarketPlaceExam.Data.Repos
             if (cartlocal != null)
             {
                 _context.Carts.Remove(cartlocal);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
@@ -61,7 +61,8 @@ namespace MarketPlaceExam.Data.Repos
         {
             return await _context
                     .Carts
-                    .Where(x=>x.PaymentId == null)
+                    .Include(x => x.CartItems)
+                    .Where(x => x.PaymentId == null)
                     .SingleOrDefaultAsync(x => x.UserId == userid);
 
         }

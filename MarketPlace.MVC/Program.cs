@@ -13,12 +13,12 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<MarketPlaceExam.Data.Data.ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<MarketPlaceExam.Data.Entities.User>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<MarketPlaceExam.Data.Data.ApplicationDbContext>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders()
     .AddDefaultUI();
 builder.Services.AddControllersWithViews();
