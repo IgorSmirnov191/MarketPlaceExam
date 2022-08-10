@@ -52,11 +52,11 @@
                             <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                 <div class="cart_icon">
                                     <img src="~/images/cart.png" alt="">
-                                    <div class="cart_count"><span>@Model.ShoppingCartProductCount</span></div>
+                                    <div class="cart_count"><span>@Model.CartModel.TotalAmountOfItemsInCart</span></div>
                                 </div>
                                 <div class="cart_content">
-                                    <div class="cart_text"><a asp-controller="ShoppingCart" asp-action="Cart">Cart</a></div>
-                                    <div class="cart_price">$@Model.ShoppingCartTotalPrice</div>
+                                    <div class="cart_text"><a asp-controller="Cart" asp-action="Index">Cart</a></div>
+                                    <div class="cart_price">$@Model.CartModel.TotalPrice</div>
                                 </div>
                             </div>
                         </div>

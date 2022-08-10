@@ -1,0 +1,54 @@
+﻿@using Marketplace.App.ViewModels.ShoppingCart
+
+@model CartViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Shopping Cart</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Sub-Total</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ShoppingCartViewModel product in Model.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => (product.Total))
+                </td>
+                <td>
+                   @* @Html.ActionLink("+", "Add", "Cart", new { sku = product.Product.Sku }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("-", "Minus", "Cart", new { sku = product.Product.Sku }, new { @class = "btn btn-danger" })*@
+
+                </td>
+                <td>
+                    @*@Html.ActionLink("Remove", "Remove", "Cart", new { sku = product.Product.Sku }, new { @class = "btn btn-danger" })*@
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="5" style="text-align:right">
+                Total: @ViewBag.total
+            </td>
+        </tr>
+    </tbody>
+</table>
+

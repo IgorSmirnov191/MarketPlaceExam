@@ -8,6 +8,7 @@ using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MarketPlaceExam.Data.Data;
+using MarketPlace.MVC.Configuration;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -67,6 +68,7 @@ void RegisterServices(WebApplicationBuilder builder)
 void RegisterAutoMapper(IServiceCollection services)
 {
     services.AddAutoMapper(typeof(BusinessMapperProfile));
+    services.AddAutoMapper(typeof(PresentationMapperProfile));
 }
 
 void RegisterBusinessServices(IServiceCollection services)

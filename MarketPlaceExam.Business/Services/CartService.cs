@@ -54,35 +54,39 @@ namespace MarketPlaceExam.Business.Services
             return model;
         }
 
-        public async Task<ShoppingCartModel> GetMainHeaderData(User user)
-        {
-            ShoppingCartModel result;
 
-            if (user == null)
-            {
-                result = new ShoppingCartModel()
-                {
-                    ShoppingCartProductCount = 0,
-                    ShoppingCartTotalPrice = 0.00M
-                };
-            }
-            else
-            {
-                result = await GetItemsInUserCart(user.Id);
-            }
+        // TODO: Duplicate method. Can be done in MAPPER
 
-            return result;
-        }
+        //public async Task<ShoppingCartModel> GetShoppingCartModel(User user)
+        //{
+        //    ShoppingCartModel result;
 
-        private async Task<ShoppingCartModel> GetItemsInUserCart(string userId)
-        {
-            CartModel cart = await GetActiveCart(userId);
+        //    if (user == null)
+        //    {
+        //        result = new ShoppingCartModel()
+        //        {
+        //            ShoppingCartProductCount = 0,
+        //            ShoppingCartTotalPrice = 0.00M
+        //        };
+        //    }
+        //    else
+        //    {
+        //        result = await GetItemsInUserCart(user.Id);
+        //    }
 
-            return new ShoppingCartModel()
-            {
-                ShoppingCartProductCount = cart.TotalAmountOfItemsInCart,
-                ShoppingCartTotalPrice = cart.TotalPrice,
-            };
-        }
+        //    return result;
+        //}
+
+        //private async Task<ShoppingCartModel> GetItemsInUserCart(string userId)
+        //{
+
+        //    CartModel cart = await GetActiveCart(userId);
+
+        //    return new ShoppingCartModel()
+        //    {
+        //        ShoppingCartProductCount = cart.TotalAmountOfItemsInCart,
+        //        ShoppingCartTotalPrice = cart.TotalPrice,
+        //    };
+        //}
     }
 }

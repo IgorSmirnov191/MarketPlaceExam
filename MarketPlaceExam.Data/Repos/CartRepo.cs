@@ -62,6 +62,7 @@ namespace MarketPlaceExam.Data.Repos
             return await _context
                     .Carts
                     .Include(x => x.CartItems)
+                    .ThenInclude(y => y.Product)
                     .Where(x => x.PaymentId == null)
                     .SingleOrDefaultAsync(x => x.UserId == userid);
 

@@ -24,14 +24,22 @@ namespace Marketplace.App.Components
         {
             User user = await _userManager.GetUserAsync(HttpContext.User);
             IEnumerable<CategoryModel> allCategories = await _categoryService.GetAllCategories();
-            ShoppingCartModel shoppingCartModel = await _cartService.GetMainHeaderData(user);
-
+            
             MainHeaderViewModel result = new MainHeaderViewModel
             {
                 ListCategories = allCategories,
-                ShoppingCartProductCount = shoppingCartModel.ShoppingCartProductCount,
-                ShoppingCartTotalPrice = shoppingCartModel.ShoppingCartTotalPrice,
             };
+
+            if (user != null)
+            {
+                var cartModel = await _cartService.GetActiveCart(user.Id);
+
+                result = new MainHeaderViewModel
+                {
+                    ListCategories = allCategories,
+                    CartModel = cartModel,
+                };
+            }
 
             return View(result);
         }

@@ -6,8 +6,6 @@ namespace Marketplace.App.ViewModels.Components
     {
         public IEnumerable<CategoryModel> ListCategories { get; set; } = new List<CategoryModel>();
 
-        public int ShoppingCartProductCount { get; set; }
-
-        public decimal ShoppingCartTotalPrice { get; set; }
+        public CartModel CartModel { get; set; } = new CartModel();
     }
 }
