@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Marketplace.App.ViewModels.Orders
+namespace MarketPlace.MVC.ViewModels.Orders
 {
     public class OrderCreateInputModel
     {

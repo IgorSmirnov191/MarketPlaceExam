@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Marketplace.App.ViewModels.Products
+namespace MarketPlace.MVC.ViewModels.Products
 {
     public class ProductCategoryViewModel
     {

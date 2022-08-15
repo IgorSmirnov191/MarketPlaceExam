@@ -1,15 +1,13 @@
-﻿using MarketPlaceExam.Data.Entities;
-using System;
-
-namespace Marketplace.App.ViewModels.Orders
+﻿namespace MarketPlace.MVC.ViewModels.Orders
 {
     public class MyOrderViewModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public DateTime OrderDate { get; set; }
         public string? UserId { get; set; }
         public int CartId { get; set; }
         public int PaymentId { get; set; }
-      
+        public int Quantity { get; set; }
+
     }
 }

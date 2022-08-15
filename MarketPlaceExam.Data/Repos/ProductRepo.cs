@@ -38,13 +38,15 @@ namespace MarketPlaceExam.Data.Repos
             return await _context.Products.FindAsync(id);
         }
 
-        public async Task UpdateProduct(Product product)
+        public async Task<bool> UpdateProduct(Product product)
         {
+            int result = 0;
             if (product != null)
             {
                 _context.Products.Update(product);
-                _context.SaveChanges();
+                result = await _context.SaveChangesAsync();
             }
+            return result> 0;
         }
 
         public async Task DeleteProduct(int id)

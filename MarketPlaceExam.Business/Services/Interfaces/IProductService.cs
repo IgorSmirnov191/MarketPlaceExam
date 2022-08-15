@@ -11,6 +11,7 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task<IEnumerable<ProductModel>> GetAllProducts();
         Task<IEnumerable<ProductModel>> GetProductsBySupplier(int supplierId);
         Task<IEnumerable<ProductModel>> GetProductsByCategory(int categoryId);
+        Task<bool> EditPicturePath(int id, string url);
         bool IsProductsEmpty();
     }
 }

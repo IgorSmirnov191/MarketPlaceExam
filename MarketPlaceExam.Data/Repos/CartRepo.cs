@@ -62,7 +62,7 @@ namespace MarketPlaceExam.Data.Repos
             return await _context
                     .Carts
                     .Include(x => x.CartItems)
-                    .ThenInclude(y => y.Product)
+                    .ThenInclude(y => y.Product).ThenInclude(z=>z.Picture)
                     .Where(x => x.PaymentId == null)
                     .SingleOrDefaultAsync(x => x.UserId == userid);
 
@@ -70,6 +70,15 @@ namespace MarketPlaceExam.Data.Repos
         public bool IsCartsEmpty()
         {
             return _context.Carts.Any();
+        }
+
+        public async Task ClearCart(int id)
+        {
+            foreach(var cartitem in _context.CartItems.Where(e=>e.CartId == id))
+            {
+               _context.CartItems.Remove(cartitem);
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }

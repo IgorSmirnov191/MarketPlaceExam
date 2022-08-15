@@ -73,16 +73,22 @@ namespace MarketPlaceExam.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pictures",
+                name: "Messages",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Uri = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MessageContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MarkAsRead = table.Column<bool>(type: "bit", nullable: false),
+                    IssuedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pictures", x => x.Id);
+                    table.PrimaryKey("PK_Messages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,47 +264,6 @@ namespace MarketPlaceExam.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(2500)", maxLength: 2500, nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    StockKeepUnitId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    QuantityPerUnit = table.Column<int>(type: "int", nullable: true),
-                    UnitSize = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    UnitWeight = table.Column<double>(type: "float", nullable: true),
-                    SupplierId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    PictureId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_Pictures_PictureId",
-                        column: x => x.PictureId,
-                        principalTable: "Pictures",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Carts",
                 columns: table => new
                 {
@@ -321,53 +286,6 @@ namespace MarketPlaceExam.Data.Migrations
                         column: x => x.PaymentId,
                         principalTable: "Payments",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Stocks",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Stocks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Stocks_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CartItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CartId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CartItems_Carts_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Carts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CartItems_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -430,10 +348,105 @@ namespace MarketPlaceExam.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CartId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Carts_CartId",
+                        column: x => x.CartId,
+                        principalTable: "Carts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pictures",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Uri = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pictures", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(2500)", maxLength: 2500, nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    StockKeepUnitId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    QuantityPerUnit = table.Column<int>(type: "int", nullable: true),
+                    UnitSize = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    UnitWeight = table.Column<double>(type: "float", nullable: true),
+                    SupplierId = table.Column<int>(type: "int", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    PictureId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_Pictures_PictureId",
+                        column: x => x.PictureId,
+                        principalTable: "Pictures",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_Suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "Suppliers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stocks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stocks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Stocks_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "ShipAddress", "ShipCity", "ShipEmail", "ShipPhoneNumber", "ShipZipCode", "TwoFactorEnabled", "UserName", "ZipCode" },
-                values: new object[] { "5942b6e9-7578-47db-abcb-37ae302d123d", 1, null, null, "61211b39-ba37-491a-86bf-fbce0e52dba8", null, true, null, null, false, null, null, null, null, null, true, "89a070dd-97a3-49d9-8dc9-2149ab432f29", null, null, null, null, null, false, "guest", null });
+                values: new object[] { "d2a59dc8-0806-49f1-b8dc-e82f2781b1ab", 0, null, null, "36539cab-54a0-4c80-81ce-0bec6f978255", "guest@sport_supplements.com", true, "Guestup", "Sport Supplements Market", false, null, null, null, null, null, true, "83de5362-be9f-4cc2-bdf2-1cc6ee4e1b38", null, null, null, null, null, false, "guest", null });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -451,8 +464,8 @@ namespace MarketPlaceExam.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Pictures",
-                columns: new[] { "Id", "Uri" },
-                values: new object[] { 1, "https:///aa-drink.com/uploads/drinks/2021-07-02-02-37-4024760210.png" });
+                columns: new[] { "Id", "ProductId", "Uri" },
+                values: new object[] { 1, null, "https:///aa-drink.com/uploads/drinks/2021-07-02-02-37-4024760210.png" });
 
             migrationBuilder.InsertData(
                 table: "Suppliers",
@@ -462,7 +475,7 @@ namespace MarketPlaceExam.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Carts",
                 columns: new[] { "Id", "Description", "PaymentId", "UserId" },
-                values: new object[] { 1, "Guest's Cart", null, "5942b6e9-7578-47db-abcb-37ae302d123d" });
+                values: new object[] { 1, "Guest's Cart", null, "d2a59dc8-0806-49f1-b8dc-e82f2781b1ab" });
 
             migrationBuilder.InsertData(
                 table: "Products",
@@ -554,6 +567,11 @@ namespace MarketPlaceExam.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pictures_ProductId",
+                table: "Pictures",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
@@ -582,10 +600,29 @@ namespace MarketPlaceExam.Data.Migrations
                 name: "IX_Stocks_ProductId",
                 table: "Stocks",
                 column: "ProductId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_CartItems_Products_ProductId",
+                table: "CartItems",
+                column: "ProductId",
+                principalTable: "Products",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Pictures_Products_ProductId",
+                table: "Pictures",
+                column: "ProductId",
+                principalTable: "Products",
+                principalColumn: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Pictures_Products_ProductId",
+                table: "Pictures");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -605,6 +642,9 @@ namespace MarketPlaceExam.Data.Migrations
                 name: "CartItems");
 
             migrationBuilder.DropTable(
+                name: "Messages");
+
+            migrationBuilder.DropTable(
                 name: "Shipments");
 
             migrationBuilder.DropTable(
@@ -620,10 +660,16 @@ namespace MarketPlaceExam.Data.Migrations
                 name: "Shippers");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Carts");
 
             migrationBuilder.DropTable(
-                name: "Carts");
+                name: "Payments");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Categories");
@@ -633,12 +679,6 @@ namespace MarketPlaceExam.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
-
-            migrationBuilder.DropTable(
-                name: "Payments");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

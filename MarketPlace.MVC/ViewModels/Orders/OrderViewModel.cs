@@ -1,10 +1,6 @@
 ﻿using MarketPlaceExam.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Marketplace.App.ViewModels.Orders
+namespace MarketPlace.MVC.ViewModels.Orders
 {
     public class OrderViewModel
     {

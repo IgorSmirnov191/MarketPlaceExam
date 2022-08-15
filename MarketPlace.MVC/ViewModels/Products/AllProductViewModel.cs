@@ -1,10 +1,8 @@
-﻿using Marketplace.App.Infrastructure;
-
-namespace Marketplace.App.ViewModels.Products
+﻿namespace MarketPlace.MVC.ViewModels.Products
 {
     public class AllProductViewModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

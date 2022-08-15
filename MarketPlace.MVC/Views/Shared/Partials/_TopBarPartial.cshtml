@@ -1,5 +1,6 @@
-﻿@using MarketPlaceExam.Data.Entities
-@using Marketplace.App.Infrastructure
+﻿
+@using MarketPlace.MVC.Infrastructure
+@using MarketPlaceExam.Data.Entities
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -22,7 +23,7 @@
                                 </div>
 
                                 <div class="top_bar_user ml-auto">
-                                    <a asp-area="" asp-controller="Profile" asp-action="Index" title="Frofile">
+                                    <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                                         @User.Identity.Name
                                         <div>
                                             <div class="top_bar_icon"></div>
@@ -39,7 +40,7 @@
                             else
                             {
                                 <div class="top_bar_user ml-auto">
-                                    <a asp-area="" asp-controller="Profile" asp-action="Index" title="Frofile">
+                                    <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                                         Hello, @User.Identity.Name!
                                         <div>
                                             <div class="top_bar_icon"></div>

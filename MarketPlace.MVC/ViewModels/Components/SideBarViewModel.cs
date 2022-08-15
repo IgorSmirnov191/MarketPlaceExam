@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Marketplace.App.ViewModels.Components
+namespace MarketPlace.MVC.ViewModels.Components
 {
     public class SideBarViewModel
     {

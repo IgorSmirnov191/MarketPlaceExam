@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MarketPlaceExam.Data.Entities;
 using System.Net.Mail;
+using MarketPlaceExam.Business.Services.Interfaces;
+using AutoMapper;
+using MarketPlaceExam.Business.Model;
 
 namespace MarketPlace.MVC.Areas.Identity.Pages.Account
 {
@@ -17,12 +20,18 @@ namespace MarketPlace.MVC.Areas.Identity.Pages.Account
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly UserManager<User> _userManager;
+        private readonly ICartService _cartService;
+        private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
-        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger, UserManager<User> userManager)
+        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger, UserManager<User> userManager, ICartService cartService, IMapper mapper, IUserService userService )
         {
             _signInManager = signInManager;
             _logger = logger;
             _userManager = userManager;
+            _cartService = cartService;
+            _mapper = mapper;
+            _userService = userService;
         }
 
         /// <summary>
@@ -132,7 +141,21 @@ namespace MarketPlace.MVC.Areas.Identity.Pages.Account
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(userName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                  
+                    var usermodel = await _userService.GetUserByUsername(userName);
+                    User user = _mapper.Map<User>(usermodel);
+                    var model = await _cartService.GetActiveCart(user.Id);
+                    if (model == null)
+                    {
+                        CartModel cart = new CartModel();
+                        cart.UserId = user.Id;
+                        await _cartService.AddCart(cart);
+                    }
+                    
+                    
+
                     _logger.LogInformation("User logged in.");
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

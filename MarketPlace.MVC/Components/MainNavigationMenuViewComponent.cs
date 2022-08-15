@@ -1,9 +1,9 @@
-﻿using Marketplace.App.ViewModels.Components;
+﻿using MarketPlace.MVC.ViewModels.Components;
 using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Marketplace.App.Components
+namespace MarketPlace.MVC.Components
 {
     [ViewComponent]
     public class MainNavigationMenuViewComponent : ViewComponent

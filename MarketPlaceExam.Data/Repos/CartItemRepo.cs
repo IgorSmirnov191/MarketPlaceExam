@@ -21,7 +21,7 @@ namespace MarketPlaceExam.Data.Repos
             if (cartitem != null)
             {
                 await _context.CartItems.AddAsync(cartitem);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
         }
@@ -31,7 +31,7 @@ namespace MarketPlaceExam.Data.Repos
             return await _context
                 .CartItems
                 .Include(x => x.Cart)
-                .Include(x => x.Product)
+                .Include(x => x.Product).ThenInclude(y=>y.Picture)
                 .ToListAsync();
         }
 
@@ -45,18 +45,26 @@ namespace MarketPlaceExam.Data.Repos
             if (cartitem != null)
             {
                 _context.CartItems.Update(cartitem);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
-        public async Task DeleteCartItem(int id)
+        public async Task<bool> DeleteCartItem(int id)
         {
-            CartItem? cartitemlocal = await _context.CartItems.FindAsync(id);
-            if (cartitemlocal != null)
+
+            int result = 0;
+            var cartitem = await _context
+                .CartItems
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+            if(cartitem != null)
             {
-                _context.CartItems.Remove(cartitemlocal);
-                _context.SaveChanges();
+                _context.Remove(cartitem);
+               result =  await _context.SaveChangesAsync();
+
             }
+
+            return result > 0;
         }
         
         public bool IsCartItemsEmpty() 
@@ -69,9 +77,46 @@ namespace MarketPlaceExam.Data.Repos
             return await _context
                .CartItems
                .Include(x => x.Cart)
-               .Include(x => x.Product)
+               .Include(x => x.Product).ThenInclude(y=>y.Picture)
                .Where(x=> x.CartId == cartid)
                .ToListAsync();
+        }
+
+        public async Task<bool> UpdateQuantityCartItemFromCartByProductId(int cartid, int productId, int quantity)
+        {
+            int  result = 0;
+            var cartitem = await _context
+                .CartItems
+                .Where(x => x.CartId == cartid)
+                .Where(x => x.ProductId == productId)
+                .FirstOrDefaultAsync();
+            if(cartitem != null)
+            { cartitem.Quantity = cartitem.Quantity + quantity;
+                _context.CartItems.Update(cartitem);
+               result = await _context.SaveChangesAsync();
+
+            }
+           return result > 0;
+
+        }
+
+        public async Task<bool> UpdateQuantityCartItemById(int itemId, int quantity)
+        {
+            int result = 0;
+            var cartitem = await _context
+                .CartItems
+                .Where(x => x.Id == itemId)
+                .FirstOrDefaultAsync();
+            if (cartitem != null)
+            {
+                cartitem.Quantity = cartitem.Quantity + quantity;
+                if(cartitem.Quantity != 0)
+                {
+                    _context.CartItems.Update(cartitem);
+                    result = await _context.SaveChangesAsync();
+                }
+             }
+            return result > 0;
         }
     }
 }

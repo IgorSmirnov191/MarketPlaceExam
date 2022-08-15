@@ -1,8 +1,8 @@
-﻿using Marketplace.App.Infrastructure;
+﻿using MarketPlace.MVC.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace Marketplace.App.ViewModels.Products
+namespace MarketPlace.MVC.ViewModels.Products
 {
     public class CreateProductInputModel
     {
@@ -18,8 +18,7 @@ namespace Marketplace.App.ViewModels.Products
         [Range(GlobalConstants.MinQuantityValue, int.MaxValue, ErrorMessage = "Quantity must be positive number more than zero")]
         public int Quantity { get; set; }
 
-        [Required]
-        public string Color { get; set; }
+        public string Color { get; set; } = "Yellow";
 
         [Required]
         [StringLength(GlobalConstants.ProductDescriptionMaxLenght, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = GlobalConstants.ProductDescriptionMinLenght)]

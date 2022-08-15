@@ -1,13 +1,13 @@
-﻿using Marketplace.App.Infrastructure;
+﻿using MarketPlace.MVC.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace Marketplace.App.ViewModels.Products
+namespace MarketPlace.MVC.ViewModels.Products
 {
     public class EditProductInputModel
     {
         [Required]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(GlobalConstants.ProductNameMaxLenght, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = GlobalConstants.ProductNameMinLenght)]
@@ -23,7 +23,7 @@ namespace Marketplace.App.ViewModels.Products
         [Range(GlobalConstants.MinQuantityValue, int.MaxValue, ErrorMessage = "Quantity must be positive number")]
         public int Quantity { get; set; }
 
-        [Required]
+      
         public string Color { get; set; }
 
         [Required]

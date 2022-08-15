@@ -3,6 +3,7 @@ using MarketPlaceExam.Business.Model;
 using MarketPlaceExam.Business.Services.Interfaces;
 using MarketPlaceExam.Data.Entities;
 using MarketPlaceExam.Data.Repos.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,12 @@ namespace MarketPlaceExam.Business.Services
         // Dependencies
         private IPictureRepo _repo;
         private IMapper _mapper;
-        public PictureService(IPictureRepo repo, IMapper mapper)
+        private IProductService _productService;
+        public PictureService(IPictureRepo repo, IMapper mapper, IProductService productService)
         {
             _repo = repo;
             _mapper = mapper;
+            _productService = productService;
         }
         public async Task AddPicture(PictureModel picture)
         {
@@ -47,6 +50,12 @@ namespace MarketPlaceExam.Business.Services
         public bool IsPicturesEmpty()
         {
             return _repo.IsPicturesEmpty();
+        }
+
+        public async Task<string> SavePicture(int productId, IFormFile picture, string path)
+        {
+           
+            return await _repo.SavePicture(productId,picture,path);
         }
     }
 }

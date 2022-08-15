@@ -54,6 +54,11 @@ namespace MarketPlaceExam.Business.Services
             return model;
         }
 
+        public async Task ClearCart(int id)
+        {
+            await _repo.ClearCart(id);
+        }
+
 
         // TODO: Duplicate method. Can be done in MAPPER
 

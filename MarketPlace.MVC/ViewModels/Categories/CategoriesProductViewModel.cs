@@ -1,6 +1,4 @@
-﻿using Marketplace.App.Infrastructure;
-
-namespace Marketplace.App.ViewModels.Categories
+﻿namespace MarketPlace.MVC.ViewModels.Categories
 {
     public class CategoriesProductViewModel
     {

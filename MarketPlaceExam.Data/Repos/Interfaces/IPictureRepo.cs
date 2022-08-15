@@ -1,4 +1,5 @@
 ﻿using MarketPlaceExam.Data.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace MarketPlaceExam.Data.Repos.Interfaces
 {
@@ -10,5 +11,6 @@ namespace MarketPlaceExam.Data.Repos.Interfaces
         Task<IEnumerable<Picture>> GetPictures();
         Task UpdatePicture(Picture picture);
         bool IsPicturesEmpty();
+        Task<string> SavePicture(int productId, IFormFile picture, string path);
     }
 }

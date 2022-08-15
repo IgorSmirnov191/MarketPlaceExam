@@ -37,9 +37,9 @@ namespace MarketPlaceExam.Business.Services
             await _repo.UpdateCartItem(cartitemEntity);
         }
 
-        public async Task DeleteCartItem(int id)
+        public async Task<bool> DeleteCartItem(int id)
         {
-            await _repo.DeleteCartItem(id);
+            return await _repo.DeleteCartItem(id);
         }
 
         public async Task<IEnumerable<CartItemModel>> GetAllCartItemsByCart(int cartid)
@@ -51,6 +51,16 @@ namespace MarketPlaceExam.Business.Services
         public bool IsCartItemsEmpty()
         {
             return _repo.IsCartItemsEmpty();
+        }
+
+        public async Task<bool> UpdateQuantityCartItemFromCartByProductId(int cartid, int productId, int quantity)
+        {
+             return await _repo.UpdateQuantityCartItemFromCartByProductId(cartid, productId, quantity); ;
+        }
+
+        public async Task<bool> UpdateQuantityCartItemById(int itemId, int quantity)
+        {
+            return await _repo.UpdateQuantityCartItemById(itemId, quantity);
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿using Marketplace.App.ViewModels.Components;
-using MarketPlaceExam.Business.Services;
+﻿using MarketPlace.MVC.ViewModels.Components;
 using MarketPlaceExam.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Marketplace.App.Components
+namespace MarketPlace.MVC.Components
 {
     public class SideBarViewComponent : ViewComponent
     {

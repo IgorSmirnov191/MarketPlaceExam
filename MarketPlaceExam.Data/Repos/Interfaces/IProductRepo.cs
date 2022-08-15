@@ -12,7 +12,7 @@ namespace MarketPlaceExam.Data.Repos.Interfaces
         Task<IEnumerable<Product>> GetProductsByNameAndCategory(string name, string category);
         Task<IEnumerable<Product>> GetProductsByName(string name);
         Task<Product> GetProduct(int id);
-        Task UpdateProduct(Product product);
+        Task<bool> UpdateProduct(Product product);
         bool IsProductsEmpty();
     }
 }

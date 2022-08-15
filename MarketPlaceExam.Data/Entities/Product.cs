@@ -32,14 +32,14 @@ namespace MarketPlaceExam.Data.Entities
 
         public decimal? UnitPrice { get; set; } = 0;
         public double? UnitWeight { get; set; } = 0;
-        public int SupplierId { get; set; }
-        public Supplier Supplier { get; set; }
+        public int? SupplierId { get; set; }
+        public Supplier? Supplier { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public int PictureId { get; set; }
         public Picture Picture { get; set; }
 
-       
+        public virtual List<Picture> Pictures { get; set; }
         public override string ToString()
         {
             return $"Id{Id}, Name: {Name}, Description: {Description}, " +

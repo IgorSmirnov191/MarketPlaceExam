@@ -1,6 +1,4 @@
-﻿using Marketplace.App.Infrastructure;
-
-namespace Marketplace.App.ViewModels.Home
+﻿namespace MarketPlace.MVC.ViewModels.Home
 {
     public class HomeProductViewModel
     {

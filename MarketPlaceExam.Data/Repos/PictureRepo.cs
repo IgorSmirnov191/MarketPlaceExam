@@ -2,6 +2,7 @@
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using MarketPlaceExam.Data.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace MarketPlaceExam.Data.Repos
 {
@@ -55,6 +56,20 @@ namespace MarketPlaceExam.Data.Repos
         public bool IsPicturesEmpty()
         {
            return _context.Pictures.Any();
-        } 
+        }
+
+        public async Task<string> SavePicture(int productId, IFormFile picture, string defaultpath)
+        {
+            var product = await _context.Products.FindAsync(productId);
+
+            var path = defaultpath + $"{DateTime.Now.Year}-{picture.FileName}";
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await picture.CopyToAsync(stream);
+            }
+
+            path = path.Replace("wwwroot", "");
+            return path;
+        }
     }
 }

@@ -67,5 +67,15 @@ namespace MarketPlaceExam.Business.Services
             IEnumerable<ProductModel> model = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductModel>>(productEntity);
             return model;
         }
+
+        public async Task<bool> EditPicturePath(int id, string url)
+        {
+            Product product = await _repo.GetProduct(id);
+            var picture = new Picture() { Uri = url };
+            var currentPicture = product.Pictures.First();
+            product.Pictures.Remove(currentPicture);
+            product.Pictures.Add(picture);
+            return  await _repo.UpdateProduct(product);
+        }
     }
 }

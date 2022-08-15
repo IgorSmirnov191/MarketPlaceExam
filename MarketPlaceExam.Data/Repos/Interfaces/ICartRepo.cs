@@ -11,5 +11,6 @@ namespace MarketPlaceExam.Data.Repos.Interfaces
         Task<IEnumerable<Cart>> GetCarts();
         Task UpdateCart(Cart cart);
         bool IsCartsEmpty();
+        Task ClearCart(int id);
     }
 }

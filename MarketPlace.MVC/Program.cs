@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MarketPlaceExam.Data.Data;
 using MarketPlace.MVC.Configuration;
+using Marketplace.Services.Interfaces;
+using Marketplace.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -84,6 +86,7 @@ void RegisterBusinessServices(IServiceCollection services)
     services.AddTransient<IStockService, StockService>();
     services.AddTransient<ISupplierService, SupplierService>();
     services.AddTransient<IUserService, UserService>();
+    services.AddTransient<IMessageService, MessageService>();
 }
 
 void RegisterRepositories(IServiceCollection services)
@@ -100,4 +103,5 @@ void RegisterRepositories(IServiceCollection services)
     services.AddTransient<IStockRepo, StockRepo>();
     services.AddTransient<ISupplierRepo, SupplierRepo>();
     services.AddTransient<IUserRepo, UserRepo>();
+    services.AddTransient<IMessageRepo, MessageRepo>();
 }

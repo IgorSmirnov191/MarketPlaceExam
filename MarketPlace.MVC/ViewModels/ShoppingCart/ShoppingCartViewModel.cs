@@ -1,4 +1,4 @@
-﻿namespace Marketplace.App.ViewModels.ShoppingCart
+﻿namespace MarketPlace.MVC.ViewModels.ShoppingCart
 {
     public class ShoppingCartViewModel
     {

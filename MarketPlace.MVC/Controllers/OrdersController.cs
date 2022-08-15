@@ -1,11 +1,10 @@
-﻿using Marketplace.App.ViewModels.Orders;
-using MarketPlaceExam.Business.Services.Interfaces;
+﻿using MarketPlaceExam.Business.Services.Interfaces;
 using MarketPlaceExam.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Marketplace.App.Controllers
+namespace MarketPlace.MVC.Controllers
 {
 
     public class OrdersController : Controller

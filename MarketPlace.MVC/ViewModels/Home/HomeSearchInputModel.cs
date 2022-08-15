@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Marketplace.App.ViewModels.Home
+﻿namespace MarketPlace.MVC.ViewModels.Home
 {
     public class HomeSearchInputModel
     {

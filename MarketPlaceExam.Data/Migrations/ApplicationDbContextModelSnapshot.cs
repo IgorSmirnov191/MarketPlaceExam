@@ -53,7 +53,7 @@ namespace MarketPlaceExam.Data.Migrations
                         {
                             Id = 1,
                             Description = "Guest's Cart",
-                            UserId = "5942b6e9-7578-47db-abcb-37ae302d123d"
+                            UserId = "d2a59dc8-0806-49f1-b8dc-e82f2781b1ab"
                         });
                 });
 
@@ -147,6 +147,47 @@ namespace MarketPlaceExam.Data.Migrations
                             Description = "Compounds which attract interest for potential benefits to body function, integrity and/or metabolism.",
                             Name = "Other"
                         });
+                });
+
+            modelBuilder.Entity("MarketPlaceExam.Data.Entities.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("IssuedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("MarkAsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MessageContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("MarketPlaceExam.Data.Entities.Order", b =>
@@ -268,12 +309,17 @@ namespace MarketPlaceExam.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Uri")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Pictures");
 
@@ -318,7 +364,7 @@ namespace MarketPlaceExam.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("SupplierId")
+                    b.Property<int?>("SupplierId")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("UnitPrice")
@@ -609,13 +655,16 @@ namespace MarketPlaceExam.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5942b6e9-7578-47db-abcb-37ae302d123d",
-                            AccessFailedCount = 1,
-                            ConcurrencyStamp = "61211b39-ba37-491a-86bf-fbce0e52dba8",
+                            Id = "d2a59dc8-0806-49f1-b8dc-e82f2781b1ab",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "36539cab-54a0-4c80-81ce-0bec6f978255",
+                            Email = "guest@sport_supplements.com",
                             EmailConfirmed = true,
+                            FirstName = "Guestup",
+                            LastName = "Sport Supplements Market",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "89a070dd-97a3-49d9-8dc9-2149ab432f29",
+                            SecurityStamp = "83de5362-be9f-4cc2-bdf2-1cc6ee4e1b38",
                             TwoFactorEnabled = false,
                             UserName = "guest"
                         });
@@ -776,7 +825,7 @@ namespace MarketPlaceExam.Data.Migrations
             modelBuilder.Entity("MarketPlaceExam.Data.Entities.CartItem", b =>
                 {
                     b.HasOne("MarketPlaceExam.Data.Entities.Cart", "Cart")
-                        .WithMany()
+                        .WithMany("CartItems")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -826,6 +875,13 @@ namespace MarketPlaceExam.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MarketPlaceExam.Data.Entities.Picture", b =>
+                {
+                    b.HasOne("MarketPlaceExam.Data.Entities.Product", null)
+                        .WithMany("Pictures")
+                        .HasForeignKey("ProductId");
+                });
+
             modelBuilder.Entity("MarketPlaceExam.Data.Entities.Product", b =>
                 {
                     b.HasOne("MarketPlaceExam.Data.Entities.Category", "Category")
@@ -842,9 +898,7 @@ namespace MarketPlaceExam.Data.Migrations
 
                     b.HasOne("MarketPlaceExam.Data.Entities.Supplier", "Supplier")
                         .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SupplierId");
 
                     b.Navigation("Category");
 
@@ -934,9 +988,19 @@ namespace MarketPlaceExam.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MarketPlaceExam.Data.Entities.Cart", b =>
+                {
+                    b.Navigation("CartItems");
+                });
+
             modelBuilder.Entity("MarketPlaceExam.Data.Entities.Payment", b =>
                 {
                     b.Navigation("Carts");
+                });
+
+            modelBuilder.Entity("MarketPlaceExam.Data.Entities.Product", b =>
+                {
+                    b.Navigation("Pictures");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,4 @@
-﻿namespace Marketplace.App.ViewModels.Components
+﻿namespace MarketPlace.MVC.ViewModels.Components
 {
     public class SideBarCategoryViewModel
     {

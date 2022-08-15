@@ -30,6 +30,7 @@ namespace MarketPlaceExam.Data.Data
         public DbSet<Shipper> Shippers { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         public DbSet<User> Users { get; set; }
 
@@ -81,7 +82,7 @@ namespace MarketPlaceExam.Data.Data
                                 Id = Guid_guest,
                                 UserName = "guest",
                                 Email = "guest@sport_supplements.com",
-                                FirstName = "Guest",
+                                FirstName = "Guestup",
                                 LastName = "Sport Supplements Market",
                                 EmailConfirmed = true,
                                 PhoneNumberConfirmed = true
