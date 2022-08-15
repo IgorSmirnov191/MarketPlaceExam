@@ -103,12 +103,14 @@ namespace MarketPlace.MVC.Controllers
                   
 
             return this.View(resultModel);
+       
+       
         }
 
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
-            var product = await _stockService.GetFromStockByStockId(id);
+            var product = await _stockService.GetFromStockByProductId(id);
             if (product == null)
             {
                 return Redirect("/");

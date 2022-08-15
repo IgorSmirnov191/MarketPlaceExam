@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MarketPlaceExam.Data.Migrations
 {
-    public partial class Create : Migration
+    public partial class create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -245,7 +245,7 @@ namespace MarketPlaceExam.Data.Migrations
                     PayZipCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     PayPhone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     PayEmail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    PayType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PayType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     ShipAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ShipCity = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ShipZipCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
@@ -281,11 +281,7 @@ namespace MarketPlaceExam.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Carts_Payments_PaymentId",
-                        column: x => x.PaymentId,
-                        principalTable: "Payments",
-                        principalColumn: "Id");
+                   
                 });
 
             migrationBuilder.CreateTable(
@@ -446,7 +442,7 @@ namespace MarketPlaceExam.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "ShipAddress", "ShipCity", "ShipEmail", "ShipPhoneNumber", "ShipZipCode", "TwoFactorEnabled", "UserName", "ZipCode" },
-                values: new object[] { "d2a59dc8-0806-49f1-b8dc-e82f2781b1ab", 0, null, null, "36539cab-54a0-4c80-81ce-0bec6f978255", "guest@sport_supplements.com", true, "Guestup", "Sport Supplements Market", false, null, null, null, null, null, true, "83de5362-be9f-4cc2-bdf2-1cc6ee4e1b38", null, null, null, null, null, false, "guest", null });
+                values: new object[] { "8b15731a-1e79-4b78-a52c-365dfc8f0e5d", 0, null, null, "31c25bf7-f96e-421d-9400-298908a61bf7", "guest@sport_supplements.com", true, "Guestup", "Sport Supplements Market", false, null, null, null, null, null, true, "dde51927-3808-4db6-a881-e0dd4267203a", null, null, null, null, null, false, "guest", null });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -475,7 +471,7 @@ namespace MarketPlaceExam.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Carts",
                 columns: new[] { "Id", "Description", "PaymentId", "UserId" },
-                values: new object[] { 1, "Guest's Cart", null, "d2a59dc8-0806-49f1-b8dc-e82f2781b1ab" });
+                values: new object[] { 1, "Guest's Cart", null, "8b15731a-1e79-4b78-a52c-365dfc8f0e5d" });
 
             migrationBuilder.InsertData(
                 table: "Products",

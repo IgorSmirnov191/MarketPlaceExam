@@ -65,7 +65,7 @@ namespace MarketPlace.MVC.Controllers
             }
             else if (inputModel.CategoryName != GlobalConstants.SearchCategoryDefaultValue)
             {
-                var resultModel = _stockService.GetStockProductByCategoryName<HomeSearchViewModel>(inputModel.CategoryName).ToList();
+                var resultModel = _stockService.GetStockProductsByCategoryName<HomeSearchViewModel>(inputModel.CategoryName).ToList();
 
                 return this.View(resultModel);
             }

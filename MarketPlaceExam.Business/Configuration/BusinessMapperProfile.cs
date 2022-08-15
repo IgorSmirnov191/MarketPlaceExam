@@ -17,7 +17,11 @@ namespace MarketPlaceExam.Business.Configuration
 
             CreateMap<OrderModel, Order>().ReverseMap();
 
-            CreateMap<PaymentModel, Payment>().ReverseMap();
+            CreateMap<PaymentModel, Payment>()
+                 .ForMember(dest => dest.PayName, x => x.MapFrom(src => src.PayUserName))
+                 .ForMember(dest => dest.PayPhone, x => x.MapFrom(src => src.PayPhoneNumber))
+                 .ForMember(dest => dest.ShipPhone, x => x.MapFrom(src => src.ShipPhoneNumber))
+                .ReverseMap();
 
             CreateMap<PictureModel, Picture>().ReverseMap();
 

@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Marketplace.MVC.ViewModels.Payments;
 using MarketPlace.MVC.Models;
 using MarketPlace.MVC.ViewModels.Categories;
 using MarketPlace.MVC.ViewModels.Components;
 using MarketPlace.MVC.ViewModels.Home;
+using MarketPlace.MVC.ViewModels.Orders;
+using MarketPlace.MVC.ViewModels.Payments;
 using MarketPlace.MVC.ViewModels.Products;
 using MarketPlace.MVC.ViewModels.ShoppingCart;
 using MarketPlaceExam.Business.Model;
@@ -78,6 +81,13 @@ namespace MarketPlace.MVC.Configuration
             CreateMap<Product, HomeSearchViewModel>()
                 .ForMember(hsvm => hsvm.Picture, x => x.MapFrom(p => p.Picture.Uri));
 
+            CreateMap<Payment, MyPaymentsViewModel>().ReverseMap();
+            CreateMap<PaymentModel, CreatePaymentInputModel>()
+                 .ForMember(dest => dest.PayName, x => x.MapFrom(src => src.PayUserName))
+                 .ForMember(dest => dest.PayPhone, s=> s.MapFrom(src => src.PayPhoneNumber))
+                 .ForMember(dest => dest.ShipPhone, s => s.MapFrom(src => src.ShipPhoneNumber))
+                 .ForMember(dest => dest.PayAddress, s => s.MapFrom(src => src.PayAddress))
+                 .ReverseMap();
 
         }
     }

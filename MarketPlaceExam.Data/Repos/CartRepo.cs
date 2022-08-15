@@ -80,5 +80,21 @@ namespace MarketPlaceExam.Data.Repos
             }
             await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> UpdatePaymentActiveCart(string userid, int paymentid)
+        {
+            int result = 0;
+            var cart = await _context
+                    .Carts
+                    .Where(x => x.PaymentId == null)
+                    .SingleOrDefaultAsync(x => x.UserId == userid);
+            if(cart != null)
+            {
+                cart.PaymentId = paymentid;
+                _context.Carts.Update(cart);
+              result =   await _context.SaveChangesAsync();
+            }
+            return result > 0;
+        }
     }
 }

@@ -24,7 +24,7 @@
                             <ul class="cat_menu">
                                 @foreach (var category in Model.Categories)
                                 {
-                                    <li><a asp-area="" asp-controller="Categories" asp-action="Category" asp-route-id="@category.Id" asp-route-name="@category.Name">@category.Name<i class="fas fa-chevron-right ml-auto"></i></a></li> @*to do: add link*@
+                                    <li><a asp-area="" asp-controller="Category" asp-action="Category" asp-route-id="@category.Id" asp-route-name="@category.Name">@category.Name<i class="fas fa-chevron-right ml-auto"></i></a></li> @*to do: add link*@
                                 }
                             </ul>
                         </div>
@@ -41,14 +41,14 @@
                                         <a href="#">Products<i class="fas fa-chevron-down"></i></a>
                                         <ul>
                                             <li><a asp-area="" asp-controller="Products" asp-action="All">AllProducts<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a asp-area="" asp-controller="Products" asp-action="Create">Create Product<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a asp-area="" asp-controller="Products" asp-action="My">MyProducts<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a asp-area="" asp-controller="Products" asp-action="Create">Add Product<i class="fas fa-chevron-down"></i></a></li>
+                                           
                                         </ul>
                                     </li>
                                     <li class="hassubs">
                                         <a href="#">Orders<i class="fas fa-chevron-down"></i></a>
                                         <ul>
-                                            <li><a asp-area="" asp-controller="Orders" asp-action="MyOrders">MyOrders<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a asp-area="" asp-controller="Orders" asp-action="Orders">Orders<i class="fas fa-chevron-down"></i></a></li>
                                         </ul>
                                     </li>
                                 }

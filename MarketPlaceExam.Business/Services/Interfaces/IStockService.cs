@@ -14,11 +14,12 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task UpdateStock(StockModel stock);
         Task<bool> AddPicturePath(int productId, string picturePath);
         bool IsStocksEmpty();
+        IQueryable<TModel> GetStockProductsByCategoryId<TModel>(int categoryId);
         IQueryable<TModel> GetAllStockProducts<TModel>();
         IQueryable<TModel> GetStockProductByInputAndCategoryName<TModel>(string input, string categoryName);
 
         IQueryable<TModel> GetStockProductByInput<TModel>(string input);
 
-        IQueryable<TModel> GetStockProductByCategoryName<TModel>(string categoryName);
+        IQueryable<TModel> GetStockProductsByCategoryName<TModel>(string categoryName);
     }
 }

@@ -43,5 +43,10 @@ namespace MarketPlaceExam.Business.Services
         {
             await _repo.DeletePayment(id);
         }
+
+        public IQueryable<TModel> GetAllPaymentsByUserId<TModel>(string userId)
+        {
+            return _repo.GetAllPaymentsByUserId<TModel>(userId);
+        }
     }
 }

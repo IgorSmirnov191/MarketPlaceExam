@@ -8,8 +8,8 @@
         public const string ShoppingCartKey = "%ShoppingCartKey%";
 
 
-        public const string PriceMinValue = "0.01";
-        public const string PriceMaxValue = "79228162514264337593543950335";
+        public const double PriceMinValue = 0.01;
+        public const double PriceMaxValue = 99999;
         public const int MinQuantityValue = 1;
         public const int ProductNameMinLenght = 2;
         public const int ProductNameMaxLenght = 100;

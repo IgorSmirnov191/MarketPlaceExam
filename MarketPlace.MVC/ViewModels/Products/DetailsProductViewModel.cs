@@ -15,7 +15,7 @@ namespace MarketPlace.MVC.ViewModels.Products
         public int AvailableQuantity { get; set; }
         public int Quantity { get; set; }=0;
 
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         public decimal Price { get; set; }
 

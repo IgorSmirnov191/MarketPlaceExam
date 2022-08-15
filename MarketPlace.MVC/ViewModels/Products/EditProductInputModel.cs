@@ -15,7 +15,7 @@ namespace MarketPlace.MVC.ViewModels.Products
         public string Name { get; set; }
 
         [Required]
-        [Range(typeof(decimal), GlobalConstants.PriceMinValue, GlobalConstants.PriceMaxValue, ErrorMessage = "Price must be positive number")]
+        [Range(GlobalConstants.PriceMinValue, GlobalConstants.PriceMaxValue, ErrorMessage = "Price must be positive number")]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
@@ -24,7 +24,7 @@ namespace MarketPlace.MVC.ViewModels.Products
         public int Quantity { get; set; }
 
       
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Required]
         [StringLength(GlobalConstants.ProductDescriptionMaxLenght, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = GlobalConstants.ProductDescriptionMinLenght)]

@@ -53,7 +53,7 @@ namespace MarketPlaceExam.Data.Migrations
                         {
                             Id = 1,
                             Description = "Guest's Cart",
-                            UserId = "d2a59dc8-0806-49f1-b8dc-e82f2781b1ab"
+                            UserId = "8b15731a-1e79-4b78-a52c-365dfc8f0e5d"
                         });
                 });
 
@@ -254,7 +254,6 @@ namespace MarketPlaceExam.Data.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PayType")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -655,16 +654,16 @@ namespace MarketPlaceExam.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d2a59dc8-0806-49f1-b8dc-e82f2781b1ab",
+                            Id = "8b15731a-1e79-4b78-a52c-365dfc8f0e5d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "36539cab-54a0-4c80-81ce-0bec6f978255",
+                            ConcurrencyStamp = "31c25bf7-f96e-421d-9400-298908a61bf7",
                             Email = "guest@sport_supplements.com",
                             EmailConfirmed = true,
                             FirstName = "Guestup",
                             LastName = "Sport Supplements Market",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "83de5362-be9f-4cc2-bdf2-1cc6ee4e1b38",
+                            SecurityStamp = "dde51927-3808-4db6-a881-e0dd4267203a",
                             TwoFactorEnabled = false,
                             UserName = "guest"
                         });

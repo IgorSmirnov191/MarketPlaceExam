@@ -52,7 +52,7 @@
                                     <div class="product_border"></div>
                                     <div><a class="product_image d-flex flex-column align-items-center justify-content-center" asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" tabindex="0"><img src="@item.Picture" alt="picture"></a></div>
                                     <div class="product_content">
-                                        <div class="product_price">$@item.Price</div>
+                                    <div class="product_price">€@item.Price.ToString("f2")</div>
                                         <div class="product_name"><div><a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" tabindex="0">@item.Name</a></div></div>
                                     </div>
                                     

@@ -98,9 +98,14 @@ namespace MarketPlaceExam.Business.Services
             return _repo.GetStockProductByInput<TModel>(input);
         }
 
-        public IQueryable<TModel> GetStockProductByCategoryName<TModel>(string categoryName)
+        public IQueryable<TModel> GetStockProductsByCategoryName<TModel>(string categoryName)
         {
             return _repo.GetStockProductByCategoryName<TModel>(categoryName);
+        }
+
+        public IQueryable<TModel> GetStockProductsByCategoryId<TModel>(int categoryId)
+        {
+            return _repo.GetStockProductByCategoryId<TModel>(categoryId);
         }
     }
 }

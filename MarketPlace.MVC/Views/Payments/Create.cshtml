@@ -1,0 +1,95 @@
+﻿@using MarketPlace.MVC.Components
+@using MarketPlace.MVC.ViewModels.Payments
+
+@model CreatePaymentInputModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+@await Component.InvokeAsync(typeof(MainHeaderViewComponent))
+@await Component.InvokeAsync(typeof(MainNavigationMenuViewComponent))
+
+<br />
+<h1 class="mx-auto text-lg-center">Checkout</h1>
+<hr class="mx-auto w-50 hr-2">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 text-center">
+            <form  method="post" asp-controller="Payments" asp-action="Create" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label asp-for="@Model.PayName" class="control-label"></label>
+                    <input asp-for="@Model.PayName" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="@Model.PayName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.PayAddress" class="control-label"></label>
+                    <input asp-for="@Model.PayAddress" class="form-control" placeholder="Address" />
+                    <span asp-validation-for="@Model.PayAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.PayCity" class="control-label"></label>
+                    <input asp-for="@Model.PayCity" class="form-control" placeholder="City" />
+                    <span asp-validation-for="@Model.PayCity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.PayZipCode" class="control-label"></label>
+                    <input asp-for="@Model.PayZipCode" class="form-control" placeholder="Zipcode" />
+                    <span asp-validation-for="@Model.PayZipCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.PayPhone" class="control-label"></label>
+                    <input asp-for="@Model.PayPhone" class="form-control" placeholder="Phone" />
+                    <span asp-validation-for="@Model.PayPhone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.PayEmail" class="control-label"></label>
+                    <input asp-for="@Model.PayEmail" class="form-control" placeholder="Phone" />
+                    <span asp-validation-for="@Model.PayEmail" class="text-danger"></span>
+                </div>
+
+               
+
+                <div class="form-group">
+                    <label asp-for="@Model.ShipAddress" class="control-label"></label>
+                    <input asp-for="@Model.ShipAddress" class="form-control" placeholder="Address" />
+                    <span asp-validation-for="@Model.ShipAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.ShipCity" class="control-label"></label>
+                    <input asp-for="@Model.ShipCity" class="form-control" placeholder="City" />
+                    <span asp-validation-for="@Model.ShipCity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.ShipZipCode" class="control-label"></label>
+                    <input asp-for="@Model.ShipZipCode" class="form-control" placeholder="Zipcode" />
+                    <span asp-validation-for="@Model.ShipZipCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.ShipPhone" class="control-label"></label>
+                    <input asp-for="@Model.ShipPhone" class="form-control" placeholder="Phone" />
+                    <span asp-validation-for="@Model.ShipPhone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.ShipEmail" class="control-label"></label>
+                    <input asp-for="@Model.ShipEmail" class="form-control" placeholder="Phone" />
+                    <span asp-validation-for="@Model.ShipEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Total" class="control-label"></label>
+                    <input asp-for="@Model.Total" class="form-control" />
+                    <span asp-validation-for="@Model.Total" class="text-danger"></span>
+                </div>
+
+                <div class="btn-group d-flex justify-content-center mt-1">
+                    <button type="submit" class="btn btn-primary btn-lg">Pay</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

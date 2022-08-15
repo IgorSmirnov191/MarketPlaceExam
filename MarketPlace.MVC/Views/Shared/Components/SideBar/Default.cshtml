@@ -11,7 +11,7 @@
         <ul class="sidebar_categories">
             @foreach (var category in Model.Categories)
             {
-                <li><a class="clc" asp-area="" asp-controller="Categories" asp-action="Category" asp-route-id="@category.Id" asp-route-name="@category.Name">@category.Name</a></li>
+                <li><a class="clc" asp-area="" asp-controller="Category" asp-action="Category" asp-route-id="@category.Id" asp-route-name="@category.Name">@category.Name</a></li>
             }
         </ul>
     </div>

@@ -2,20 +2,24 @@
 using MarketPlaceExam.Data.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using MarketPlaceExam.Data.Data;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace MarketPlaceExam.Data.Repos
 {
     public class PaymentRepo : IPaymentRepo
     {
         private ApplicationDbContext _context;
+        private IMapper _mapper;
 
 
-        public PaymentRepo(ApplicationDbContext context)
+        public PaymentRepo(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        
+
         public async Task AddPayment(Payment payment)
         {
             if (payment != null)
@@ -57,6 +61,16 @@ namespace MarketPlaceExam.Data.Repos
                 _context.Payments.Remove(paymentlocal);
                 _context.SaveChanges();
             }
+        }
+
+        public IQueryable<TModel> GetAllPaymentsByUserId<TModel>(string userId)
+        {
+            var payments = _context
+                .Payments
+                .Where(x => x.UserId == userId);
+             var result =payments.ProjectTo<TModel>(_mapper.ConfigurationProvider);
+
+            return result;
         }
     }
 }

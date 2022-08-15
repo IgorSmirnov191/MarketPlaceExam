@@ -36,7 +36,7 @@ namespace MarketPlaceExam.Business.Model
         public string ShipEmail { get; set; }
 
         [Required]
-        public decimal Total { get; set; } = 0;
+        public decimal Total { get; set; }
        
         public List<Cart> Carts { get; set; }
     }

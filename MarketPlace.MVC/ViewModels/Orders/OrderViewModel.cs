@@ -4,7 +4,7 @@ namespace MarketPlace.MVC.ViewModels.Orders
 {
     public class OrderViewModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public DateTime OrderDate { get; set; }
         public string? UserId { get; set; }
         public User? User { get; set; }

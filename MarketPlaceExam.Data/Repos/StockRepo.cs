@@ -43,7 +43,12 @@ namespace MarketPlaceExam.Data.Repos
         
         public async Task<Stock> GetStock(int id)
         {
-            return await _context.Stocks.FindAsync(id);
+            return await _context
+               .Stocks
+                 .Include(x => x.Product).ThenInclude(y => y.Category)
+                 .Include(x => x.Product).ThenInclude(z => z.Supplier)
+                 .Include(x => x.Product).ThenInclude(p => p.Picture)
+                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<bool> UpdateStock(Stock stock)
@@ -151,6 +156,18 @@ namespace MarketPlaceExam.Data.Repos
                .Products
                .Include(x => x.Category)
                .Where(x => x.Category.Name.ToLower() == categoryName.ToLower());
+
+            var result = products.ProjectTo<TModel>(_mapper.ConfigurationProvider);
+
+            return result;
+        }
+
+        public IQueryable<TModel> GetStockProductByCategoryId<TModel>(int categoryId)
+        {
+            var products = _context
+              .Products
+              .Include(x => x.Category)
+              .Where(x => x.Category.Id == categoryId);
 
             var result = products.ProjectTo<TModel>(_mapper.ConfigurationProvider);
 

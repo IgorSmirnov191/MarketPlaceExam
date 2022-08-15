@@ -59,6 +59,11 @@ namespace MarketPlaceExam.Business.Services
             await _repo.ClearCart(id);
         }
 
+        public async Task UpdatePaymentActiveCart(string userid, int paymentid)
+        {
+            await _repo.UpdatePaymentActiveCart(userid, paymentid);
+        }
+
 
         // TODO: Duplicate method. Can be done in MAPPER
 

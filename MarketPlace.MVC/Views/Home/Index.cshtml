@@ -13,12 +13,11 @@
     <div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
     <div class="container fill_height">
         <div class="row fill_height">
-            <div class="banner_product_image"><img src="~/images/banner_product.png" alt=""></div>
+            <div class="banner_product_image"><img src="~/images/banner_product12.png" alt=""></div>
             <div class="col-lg-5 offset-lg-4 fill_height">
                 <div class="banner_content">
-                    <h1 class="banner_text">new era of smartphones</h1>
-                    <div class="banner_price"><span>$1500</span>$1250</div>
-                    <div class="banner_product_name">Apple iPhone X</div>
+                    <h1 class="banner_text">new era of suppliments</h1>
+                    <div class="banner_price"><span>€28.99</span>€25.99</div>
                     <div class="button banner_button"><a asp-controller="Products" asp-action="All">Shop Now</a></div>
                 </div>
             </div>
@@ -67,7 +66,7 @@
                                     <div class="product_border"></div>
                                     <div><a class="product_image d-flex flex-column align-items-center justify-content-center" asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" tabindex="0"><img src="@item.PictureUrl" alt="picture"></a></div>
                                     <div class="product_content">
-                                        <div class="product_price">$@item.Price</div>
+                                    <div class="product_price">€@item.Price.ToString("f2")</div>
                                         <div class="product_name"><div><a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" tabindex="0">@item.Name</a></div></div>
                                     </div>
                                     

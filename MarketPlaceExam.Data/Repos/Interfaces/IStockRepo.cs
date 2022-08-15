@@ -19,5 +19,6 @@ namespace MarketPlaceExam.Data.Repos.Interfaces
         IQueryable<TModel> GetStockProductByInput<TModel>(string input);
 
         IQueryable<TModel> GetStockProductByCategoryName<TModel>(string categoryName);
+        IQueryable<TModel> GetStockProductByCategoryId<TModel>(int categoryId);
     }
 }

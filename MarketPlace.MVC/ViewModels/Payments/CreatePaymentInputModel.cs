@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace MarketPlaceExam.Data.Entities
+namespace MarketPlace.MVC.ViewModels.Payments
 {
-    public class Payment
+    public class CreatePaymentInputModel
     {
-        [Key]
-        public int Id { get; set; }
-        public string? UserId { get; set; }
-        public User? User { get; set; } 
-        
         [Required]
         [MaxLength(50)]
         public string PayName { get; set; }
@@ -29,10 +19,11 @@ namespace MarketPlaceExam.Data.Entities
         [Required]
         [MaxLength(8)]
         public string PayZipCode { get; set; }
-     
+
         [MaxLength(50)]
         public string PayPhone { get; set; }
 
+        [Required]
         [MaxLength(50)]
         public string? PayEmail { get; set; }
 
@@ -60,15 +51,7 @@ namespace MarketPlaceExam.Data.Entities
 
         [Required]
         public decimal Total { get; set; }
-       
-        public List<Cart> Carts { get; set; }
-        public override string ToString()
-        {
-            return $"Id{Id}, UserId {UserId}, PayName: {PayName}, " +
-                $"PayAddress: {PayAddress}, PayCity: {PayCity}, PayZipCode: {PayZipCode}, " +
-                $"PayPhone: {PayPhone}, PayEmail: {PayEmail}" +
-                $"ShipAddress: {ShipAddress}, ShipCity: {ShipCity}, ShipZipCode: {ShipZipCode}," +
-                $"ShipPhone: {ShipPhone}, ShipEmail: {ShipEmail}, Total: €{Total}";
-        }
+
+        public string? UserId { get; set; }
     }
 }

@@ -12,5 +12,6 @@ namespace MarketPlaceExam.Data.Repos.Interfaces
         Task UpdateCart(Cart cart);
         bool IsCartsEmpty();
         Task ClearCart(int id);
+        Task<bool> UpdatePaymentActiveCart(string userid, int paymentid);
     }
 }
