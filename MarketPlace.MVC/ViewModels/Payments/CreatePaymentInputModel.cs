@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MarketPlace.MVC.Infrastructure;
+using System.ComponentModel.DataAnnotations;
 
 namespace MarketPlace.MVC.ViewModels.Payments
 {
@@ -50,6 +51,7 @@ namespace MarketPlace.MVC.ViewModels.Payments
         public string ShipEmail { get; set; }
 
         [Required]
+        [RegularExpression(@"^\d+\.\d{0,2}$")]
         public decimal Total { get; set; }
 
         public string? UserId { get; set; }

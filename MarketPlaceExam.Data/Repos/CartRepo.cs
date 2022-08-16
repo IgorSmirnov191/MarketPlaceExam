@@ -34,7 +34,12 @@ namespace MarketPlaceExam.Data.Repos
 
         public async Task<Cart> GetCart(int id)
         {
-            return await _context.Carts.FindAsync(id);
+            // return await _context.Carts.FindAsync(id);
+            return await _context
+                     .Carts
+                     .Include(x => x.CartItems)
+                     .ThenInclude(y => y.Product).ThenInclude(z => z.Picture)
+                     .SingleOrDefaultAsync(x => x.Id == id);
 
         }
 
@@ -81,19 +86,55 @@ namespace MarketPlaceExam.Data.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> UpdatePaymentActiveCart(string userid, int paymentid)
+        public async Task<bool> UpdatePaymentActiveCart(Payment payment)
         {
             int result = 0;
-            var cart = await _context
+           
+            if (String.IsNullOrEmpty(payment.UserId))
+            {
+                await _context.Payments.AddAsync(payment);
+                await _context.SaveChangesAsync();
+                await _context.Entry(payment).GetDatabaseValuesAsync();
+               
+                Cart cartnew = new Cart();
+                cartnew.PaymentId = payment.Id;
+                await _context.Carts.AddAsync(cartnew);
+                await _context.SaveChangesAsync();
+                await _context.Entry(payment).GetDatabaseValuesAsync();
+
+                var cartitems = await _context
+                    .CartItems
+                    .Where(x => x.CartId == 1).ToListAsync();
+                foreach(CartItem cartItem in cartitems)
+                {
+                   await _context.CartItems.AddAsync( new CartItem { CartId = cartnew.Id, ProductId = cartItem.ProductId, Quantity = cartItem.Quantity});
+                   _context.CartItems.Remove(cartItem);
+                }
+
+                result = await _context.SaveChangesAsync();
+            }
+            else
+            {
+                var cart = await _context
                     .Carts
                     .Where(x => x.PaymentId == null)
-                    .SingleOrDefaultAsync(x => x.UserId == userid);
-            if(cart != null)
-            {
-                cart.PaymentId = paymentid;
-                _context.Carts.Update(cart);
-              result =   await _context.SaveChangesAsync();
+                    .SingleOrDefaultAsync(x => x.UserId == payment.UserId);
+                if (cart != null)
+                {
+                    await _context.Payments.AddAsync(payment);
+                    await _context.SaveChangesAsync();
+                    await _context.Entry(payment).GetDatabaseValuesAsync();
+                    cart.PaymentId = payment.Id;
+                    _context.Carts.Update(cart);
+                    Cart cartnew = new Cart();
+                    cartnew.UserId = payment.UserId;
+                    await _context.Carts.AddAsync(cartnew);
+                    result = await _context.SaveChangesAsync();
+                }
+
             }
+            
+            
             return result > 0;
         }
     }

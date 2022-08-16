@@ -59,9 +59,9 @@ namespace MarketPlaceExam.Business.Services
             await _repo.ClearCart(id);
         }
 
-        public async Task UpdatePaymentActiveCart(string userid, int paymentid)
+        public async Task<bool> UpdatePaymentActiveCart(PaymentModel paymentmodel)
         {
-            await _repo.UpdatePaymentActiveCart(userid, paymentid);
+            return await _repo.UpdatePaymentActiveCart(_mapper.Map<Payment>(paymentmodel));
         }
 
 

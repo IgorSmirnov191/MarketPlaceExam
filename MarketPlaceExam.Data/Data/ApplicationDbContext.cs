@@ -4,15 +4,17 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
 
+
 namespace MarketPlaceExam.Data.Data
-{
+{ 
+    
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-        static string Guid_guest = Guid.NewGuid().ToString();
+        public static string Guid_guest = Guid.NewGuid().ToString();
         public DbSet<Cart> Carts { get; set; }
 
         public DbSet<CartItem> CartItems { get; set; }
@@ -109,7 +111,7 @@ namespace MarketPlaceExam.Data.Data
                                  Id = 1,
                                  Name = "AA Drink Iso Lemon",
                                  Description = "AA Drink Hydration Pet 12 x 0.5 liter",
-                                 Price = 12.52m,
+                                 Price = 14,
                                  StockKeepUnitId = "AAIsoLemon12x500",
                                  QuantityPerUnit = 12,
                                  CategoryId = 1,

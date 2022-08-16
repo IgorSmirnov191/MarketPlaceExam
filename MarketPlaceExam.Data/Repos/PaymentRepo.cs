@@ -20,13 +20,20 @@ namespace MarketPlaceExam.Data.Repos
         }
 
 
-        public async Task AddPayment(Payment payment)
+        public async Task<int> AddPayment(Payment payment)
         {
-            if (payment != null)
+           int id = 0;
+           if (payment != null)
             {
-                await _context.Payments.AddAsync(payment);
-                _context.SaveChanges();
+             await _context.Payments.AddAsync(payment); 
+             await _context.SaveChangesAsync();
+             await _context.Entry(payment).GetDatabaseValuesAsync();
+            id = payment.Id;
+            
+              
             }
+                return id;
+
         }
 
         public async Task<IEnumerable<Payment>> GetPayments()
@@ -72,5 +79,6 @@ namespace MarketPlaceExam.Data.Repos
 
             return result;
         }
+
     }
 }

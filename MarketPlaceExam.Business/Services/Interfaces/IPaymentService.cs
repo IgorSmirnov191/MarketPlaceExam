@@ -4,7 +4,7 @@ namespace MarketPlaceExam.Business.Services.Interfaces
 {
     public interface IPaymentService
     {
-        Task AddPayment(PaymentModel payment);
+        Task<int> AddPayment(PaymentModel payment);
         Task DeletePayment(int id);
         
         IQueryable<TModel> GetAllPaymentsByUserId<TModel>(string userId);

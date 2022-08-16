@@ -11,6 +11,6 @@ namespace MarketPlaceExam.Business.Services.Interfaces
         Task<CartModel> GetActiveCart(string userid);
         bool IsCartsEmpty();
         Task ClearCart(int id);
-        Task UpdatePaymentActiveCart(string userid, int paymentid);
+        Task<bool> UpdatePaymentActiveCart(PaymentModel paymentmodel);
     }
 }

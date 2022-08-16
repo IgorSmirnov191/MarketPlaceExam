@@ -32,7 +32,7 @@ namespace MarketPlace.MVC.Controllers
                 MarketPlaceExam.Business.Model.CartModel isCartAny = await _cartService.GetActiveCart(user.Id);
                 if (isCartAny != null)
                 {
-                    return Redirect("/ShoppingCart/Cart");
+                    return Redirect("/");
                 }
             }
 

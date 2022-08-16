@@ -39,6 +39,7 @@ namespace MarketPlace.MVC.Controllers
                 MarketPlaceExam.Business.Model.CartModel isCartAny = await _cartService.GetActiveCart(user.Id);
                 if (isCartAny != null)
                 {
+
                     PaymentModel paymentmodel = new PaymentModel()
                     {
                         UserId = user.Id,
@@ -55,17 +56,29 @@ namespace MarketPlace.MVC.Controllers
                         ShipEmail = user.ShipEmail,
                         Total = isCartAny.TotalPrice
                     };
+                  
                     CreatePaymentInputModel vm = _mapper.Map<CreatePaymentInputModel>(paymentmodel);
                     return View(vm);
                     
 
                 }
             }
+            else
+            {
+                MarketPlaceExam.Business.Model.CartModel isCart1 = await _cartService.GetCart(1);
+                PaymentModel paymentmodel = new PaymentModel()
+                {
+                   Total = isCart1.TotalPrice
+                };
+
+                CreatePaymentInputModel vm = _mapper.Map<CreatePaymentInputModel>(paymentmodel);
+                return View(vm);
+            }
 
             return View();
         }
 
-        [Authorize]
+      
         [HttpPost]
         public async Task<IActionResult> Create(CreatePaymentInputModel inputModel)
         {
@@ -74,12 +87,12 @@ namespace MarketPlace.MVC.Controllers
                 return View(inputModel);
             }
             User user = await _userManager.GetUserAsync(HttpContext.User);
-           
             var paymentmodel = _mapper.Map<PaymentModel>(inputModel);
-            paymentmodel.UserId = user.Id;
-           
-            await _paymentService.AddPayment(paymentmodel);
-            await _cartService.UpdatePaymentActiveCart(user.Id, paymentmodel.Id);
+            if(user != null)
+            {
+                    paymentmodel.UserId = user.Id;
+            }
+            await _cartService.UpdatePaymentActiveCart(paymentmodel);
             return Redirect("/"); ;
         }
 

@@ -60,8 +60,8 @@ namespace  MarketPlace.MVC.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
-        public static string Stock => "Stock";
-        public static string Orders => "Orders";
+        public static string Stock => "Home";
+        public static string Orders => "Home";
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used

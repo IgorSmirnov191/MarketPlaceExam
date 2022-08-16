@@ -6,7 +6,7 @@
         public const string UserRole = "User";
 
         public const string ShoppingCartKey = "%ShoppingCartKey%";
-
+       
 
         public const double PriceMinValue = 0.01;
         public const double PriceMaxValue = 99999;

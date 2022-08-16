@@ -11,8 +11,8 @@ namespace MarketPlace.MVC.ViewModels.Products
         public string Name { get; set; }
 
         [Required]
-        [Range(GlobalConstants.PriceMinValue, GlobalConstants.PriceMaxValue, ErrorMessage = "Price must be positive number")]
-        [DataType(DataType.Currency)]
+        [Range( GlobalConstants.PriceMinValue, GlobalConstants.PriceMaxValue, ErrorMessage = "Price must be positive number")]
+        [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
         public decimal Price { get; set; }
 
         [Required]
